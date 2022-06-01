@@ -1,0 +1,740 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Akai">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="BUAA OS Lab01 实验报告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lab01">
+<meta property="og:url" content="https://fieldry.github.io/2022/04/05/Lab01/index.html">
+<meta property="og:site_name" content="Akai">
+<meta property="og:description" content="BUAA OS Lab01 实验报告">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://fieldry.github.io/img/Lab01/lab1-elf.png">
+<meta property="article:published_time" content="2022-04-05T05:39:00.000Z">
+<meta property="article:modified_time" content="2022-06-01T08:41:20.701Z">
+<meta property="article:author" content="Akai">
+<meta property="article:tag" content="MOS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fieldry.github.io/img/Lab01/lab1-elf.png">
+  
+  
+  
+  <title>Lab01 - Akai</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"fieldry.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 80vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Akai&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Friends
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Lab01"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-05 13:39" pubdate>
+          April 5, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          51 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Lab01</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h2 id="thinking1-1"><a href="#thinking1-1" class="headerlink" title="thinking1.1"></a>thinking1.1</h2><h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p><code>-D : Display assembler contents of all sections</code>，即反汇编所有节的内容</p>
+<p><code>-S : Intermix source code with disassembly</code>，显示与反汇编结合的源代码</p>
+<h3 id="编译与反汇编Ⅰ"><a href="#编译与反汇编Ⅰ" class="headerlink" title="编译与反汇编Ⅰ"></a>编译与反汇编Ⅰ</h3><h4 id="main-c"><a href="#main-c" class="headerlink" title="main.c"></a>main.c</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">int</span> a = <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> b = <span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span> c = a + b;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="反汇编main-o-只截取main代码段"><a href="#反汇编main-o-只截取main代码段" class="headerlink" title="反汇编main.o(只截取main代码段)"></a>反汇编main.o(只截取main代码段)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell">00000000 &lt;main&gt;:<br>    0:   27bdffe0    addiu   sp,sp,-32	//8 bytes<br>    4:   afbe0018    sw  s8,24(sp)		//store $s8 into stack<br>    8:   03a0f021    move    s8,sp		//store $sp into s8<br>    c:   24020001    li  v0,1			//$v0 = 1<br>    10:   afc20010    sw  v0,16(s8)		//<br>    14:   24020002    li  v0,2<br>    18:   afc2000c    sw  v0,12(s8)<br>    1c:   8fc30010    lw  v1,16(s8)<br>    20:   8fc2000c    lw  v0,12(s8)<br>    24:   00621021    addu    v0,v1,v0<br>    28:   afc20008    sw  v0,8(s8)<br>    2c:   00001021    move    v0,zero<br>    30:   03c0e821    move    sp,s8<br>    34:   8fbe0018    lw  s8,24(sp)<br>    38:   27bd0020    addiu   sp,sp,32<br>    3c:   03e00008    jr  ra<br>    40:   00000000    nop<br></code></pre></td></tr></table></figure>
+
+<h4 id="反汇编main-只截取main代码段"><a href="#反汇编main-只截取main代码段" class="headerlink" title="反汇编main(只截取main代码段)"></a>反汇编main(只截取main代码段)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell">004000b0 &lt;main&gt;:<br>    4000b0:   27bdffe0    addiu   sp,sp,-32<br>    4000b4:   afbe0018    sw  s8,24(sp)<br>    4000b8:   03a0f021    move    s8,sp<br>    4000bc:   24020001    li  v0,1<br>    4000c0:   afc20010    sw  v0,16(s8)<br>    4000c4:   24020002    li  v0,2<br>    4000c8:   afc2000c    sw  v0,12(s8)<br>    4000cc:   8fc30010    lw  v1,16(s8)<br>    4000d0:   8fc2000c    lw  v0,12(s8)<br>    4000d4:   00621021    addu    v0,v1,v0<br>    4000d8:   afc20008    sw  v0,8(s8)<br>    4000dc:   00001021    move    v0,zero<br>    4000e0:   03c0e821    move    sp,s8<br>    4000e4:   8fbe0018    lw  s8,24(sp)<br>    4000e8:   27bd0020    addiu   sp,sp,32<br>    4000ec:   03e00008    jr  ra<br>    4000f0:   00000000    nop<br></code></pre></td></tr></table></figure>
+
+<p>在链接时进行了重定位，<code>main</code>地址不再是0，而是0x4000b0。</p>
+<h3 id="编译与反汇编Ⅱ——反汇编vmlinux"><a href="#编译与反汇编Ⅱ——反汇编vmlinux" class="headerlink" title="编译与反汇编Ⅱ——反汇编vmlinux"></a>编译与反汇编Ⅱ——反汇编vmlinux</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs shell">80010040 &lt;main&gt;:<br>    80010040:   27bdffe8    addiu   sp,sp,-24<br>    80010044:   afbf0010    sw  ra,16(sp)<br>    80010048:   3c048001    lui a0,0x8001<br>    8001004c:   0c00428e    jal 80010a38 &lt;printf&gt;<br>    80010050:   24840af8    addiu   a0,a0,2808<br>    80010054:   3c048001    lui a0,0x8001<br>    80010058:   24840b14    addiu   a0,a0,2836<br>    8001005c:   2405000a    li  a1,10<br>    80010060:   3c068001    lui a2,0x8001<br>    80010064:   0c00428e    jal 80010a38 &lt;printf&gt;<br>    80010068:   24c60b1c    addiu   a2,a2,2844<br>    8001006c:   0c004024    jal 80010090 &lt;mips_init&gt;<br>    80010070:   00000000    nop	   <br>    80010074:   3c048001    lui a0,0x8001<br>    80010078:   24840b24    addiu   a0,a0,2852<br>    8001007c:   24050014    li  a1,20<br>    80010080:   3c068001    lui a2,0x8001<br>    80010084:   0c00429e    jal 80010a78 &lt;_panic&gt;<br>    80010088:   24c60b2c    addiu   a2,a2,2860<br>    8001008c:   00000000    nop<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="thinking1-2"><a href="#thinking1-2" class="headerlink" title="thinking1.2"></a>thinking1.2</h2><p>之前的<code>testELF</code>文件是小端编码，而内核文件<code>vmlinux</code>是大端编码，在读取数据时会产生错误，最终导致读取地址越界，因此我们的<code>readELF</code>程序并不能解析。</p>
+<h2 id="thinking1-3"><a href="#thinking1-3" class="headerlink" title="thinking1.3"></a>thinking1.3</h2><p>因为在<code>GXemul</code>仿真器的帮助下，我们已经有了完整的C环境，只需要将内核加载后跳转到内核函数入口就可以启动完毕。</p>
+<p>在链接器中，我们指定了内核加载的地址，并通过<code>start</code>中的代码，初始化硬件设备，设置堆栈入口，然后跳转到了内核函数入口处。</p>
+<h2 id="thinking1-4"><a href="#thinking1-4" class="headerlink" title="thinking1.4"></a>thinking1.4</h2><p>避免<strong>页面冲突</strong>现象，即两个程序所占空间不能重合；</p>
+<p>避免<strong>页面共享</strong>现象，即两个程序占据了同一页的空间。</p>
+<p>对于当前程序加载时，应当以前一程序的尾地址<strong>向后</strong>页对齐后的地址作为起始地址，即保证两个程序不会占据同一页的空间，避免了页面共享和页面冲突现象。</p>
+<h2 id="thinking1-5"><a href="#thinking1-5" class="headerlink" title="thinking1.5"></a>thinking1.5</h2><p>内核入口在<code>0x80010000</code></p>
+<p><code>main</code>函数在<code>0x80010040</code>，从对<code>vmlinux</code>的反汇编中可以看到</p>
+<p>在<code>start.S</code>文件中设置堆栈入口后，通过调用<code>main</code>函数，即<code>MIPS</code>中的<code>jal</code>指令，进入<code>main</code>函数</p>
+<p>通过链接和重定位后，每个函数有自己的地址，可以通过<code>jal</code>进行跨文件调用函数</p>
+<h2 id="thinking1-6"><a href="#thinking1-6" class="headerlink" title="thinking1.6"></a>thinking1.6</h2><p>将<code>CP0</code>的状态寄存器<code>STATUS REGISTER</code>置0，则其中的全局中断使能位也为0，禁用全局中断。</p>
+<p>将<code>CP0</code>的<code>CONFIG</code>寄存器中值取出，将低三位置0又将第2位置1，则低三位K0区值为2，这时意为决定kseg0区不用高速缓存。</p>
+<h1 id="实验难点"><a href="#实验难点" class="headerlink" title="实验难点"></a>实验难点</h1><h2 id="难点一-ELF文件的解析"><a href="#难点一-ELF文件的解析" class="headerlink" title="难点一 ELF文件的解析"></a>难点一 ELF文件的解析</h2><p><img src="/img/Lab01/lab1-elf.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>   e_ident[EI_NIDENT];     <span class="hljs-comment">/* Magic number and other info */</span><br>    <span class="hljs-comment">// 存放魔数以及其他信息</span><br>    Elf32_Half      e_type;                 <span class="hljs-comment">/* Object file type */</span><br>    <span class="hljs-comment">// 文件类型 </span><br>    Elf32_Half      e_machine;              <span class="hljs-comment">/* Architecture */</span><br>    <span class="hljs-comment">// 机器架构</span><br>    Elf32_Word      e_version;              <span class="hljs-comment">/* Object file version */</span><br>    <span class="hljs-comment">// 文件版本</span><br>    Elf32_Addr      e_entry;                <span class="hljs-comment">/* Entry point virtual address */</span><br>    <span class="hljs-comment">// 入口点的虚拟地址</span><br>    Elf32_Off       e_phoff;                <span class="hljs-comment">/* Program header table file offset */</span><br>    <span class="hljs-comment">// 程序头表所在处与此文件头的偏移</span><br>    Elf32_Off       e_shoff;                <span class="hljs-comment">/* Section header table file offset */</span><br>    <span class="hljs-comment">// 节头表所在处与此文件头的偏移</span><br>    Elf32_Word      e_flags;                <span class="hljs-comment">/* Processor-specific flags */</span><br>    <span class="hljs-comment">// 针对处理器的标记</span><br>    Elf32_Half      e_ehsize;               <span class="hljs-comment">/* ELF header size in bytes */</span><br>    <span class="hljs-comment">// ELF文件头的大小（单位为字节）</span><br>    Elf32_Half      e_phentsize;            <span class="hljs-comment">/* Program header table entry size */</span><br>    <span class="hljs-comment">// 程序头表入口大小</span><br>    Elf32_Half      e_phnum;                <span class="hljs-comment">/* Program header table entry count */</span><br>    <span class="hljs-comment">// 程序头表入口数</span><br>    Elf32_Half      e_shentsize;            <span class="hljs-comment">/* Section header table entry size */</span><br>    <span class="hljs-comment">// 节头表入口大小</span><br>    Elf32_Half      e_shnum;                <span class="hljs-comment">/* Section header table entry count */</span><br>    <span class="hljs-comment">// 节头表入口数</span><br>    Elf32_Half      e_shstrndx;             <span class="hljs-comment">/* Section header string table index */</span><br>    <span class="hljs-comment">// 节头字符串编号</span><br>&#125; Elf32_Ehdr;<br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>  <span class="hljs-comment">// section name</span><br>  Elf32_Word sh_name;<br>  <span class="hljs-comment">// section type</span><br>  Elf32_Word sh_type;<br>  <span class="hljs-comment">// section flags</span><br>  Elf32_Word sh_flags;<br>  <span class="hljs-comment">// section addr</span><br>  Elf32_Addr sh_addr;<br>  <span class="hljs-comment">// offset from elf head of this entry</span><br>  Elf32_Off sh_offset;<br>  <span class="hljs-comment">// byte size of this section</span><br>  Elf32_Word sh_size;<br>  <span class="hljs-comment">// link</span><br>  Elf32_Word sh_link;<br>  <span class="hljs-comment">// extra info</span><br>  Elf32_Word sh_info;<br>  <span class="hljs-comment">// alignment</span><br>  Elf32_Word sh_addralign;<br>  <span class="hljs-comment">// entry size</span><br>  Elf32_Word sh_entsize;<br> &#125;Elf32_Shdr;<br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>  <span class="hljs-comment">// segment type</span><br>  Elf32_Word p_type;<br>  <span class="hljs-comment">// offset from elf file head of this entry</span><br>  Elf32_Off p_offset;<br>  <span class="hljs-comment">// virtual addr of this segment</span><br>  Elf32_Addr p_vaddr;<br>  <span class="hljs-comment">// physical addr, in linux, this value is meanless and has same value of p_vaddr</span><br>  Elf32_Addr p_paddr;<br>  <span class="hljs-comment">// file size of this segment</span><br>  Elf32_Word p_filesz;<br>  <span class="hljs-comment">// memory size of this segment</span><br>  Elf32_Word p_memsz;<br>  <span class="hljs-comment">// segment flag</span><br>  Elf32_Word p_flags;<br>  <span class="hljs-comment">// alignment</span><br>  Elf32_Word p_align;<br> &#125;Elf32_Phdr;<br><br></code></pre></td></tr></table></figure>
+
+<p>这是<code>Lab1</code>的第一道难关，也是第一次上机的重要考点，在反复阅读代码以及ELF手册后，终于明白了ELF文件大概布局和格式。</p>
+<h3 id="ELF-Header"><a href="#ELF-Header" class="headerlink" title="ELF Header"></a>ELF Header</h3><p>每个ELF文件有且仅有一个ELF Header，也就是上述定义为<code>Elf32_Ehdr</code>的结构体，在这里记录了整个ELF文件的重要信息，其中最值得关注的，例如：</p>
+<ul>
+<li><code>e_ident</code>：是ELF文件的标识符，一共16个字节的内容，其中前4字节又被称为魔数，用于标识这是一个ELF文件；第6个字节是数据编码格式，用于判断是小端存储还是大端存储。</li>
+<li><code>e_entry</code>：程序入口的虚拟地址。</li>
+<li><code>e_ehsize</code>：ELF文件头的大小。</li>
+<li><code>e_phoff/e_shoff</code>：程序(节)头表的偏移地址，都是相对于ELF文件起始地址的偏移量</li>
+<li><code>e_phentsize/e_shentsize</code>：程序(节)头表中每一表项的大小。</li>
+<li><code>e_phnum/e_shnum</code>：程序(节)头表中表项的数量。</li>
+</ul>
+<p>了解后三个变量的定义后，就基本可以做出<code>exercise1.2</code>了。</p>
+<h3 id="段与节"><a href="#段与节" class="headerlink" title="段与节"></a>段与节</h3><p>这是ELF文件中间的部分，也是文件真正的内容所在。</p>
+<p>ELF文件有三种格式：可重定位文件，共享目标文件和可执行文件。</p>
+<p>当文件为可重定位文件时，我们将中间部分称为节，这时在文件末尾的节头表相对更重要，它记录了所有节的信息；</p>
+<p>当文件为另外两种类型时，我们将中间部分称为段，这时在文件头部的程序头表更为重要，它记录了所有段的信息。</p>
+<p>总而言之，节与段只是在不同文件中表现形式的区别，实际上是同一部分内容。一般来说，段的数量会少于节，因为一个段一般会包含多个节的内容。</p>
+<h3 id="程序头表与节头表"><a href="#程序头表与节头表" class="headerlink" title="程序头表与节头表"></a>程序头表与节头表</h3><p>从ELF文件布局图中看，这两个表一个在文件开头，一个在文件结尾(实际布局可能有所差异)。</p>
+<p>之前提到过ELF文件头对应于一个ELF文件，在文件中有且仅有一个。</p>
+<p>但是对于<code>Elf32_Shdr, Elf32_Shdr</code>两个结构体，每一个结构体就是表中的一个表项，对应于实际ELF文件中的一个节或段，记录了对应节或段的重要信息，其数量往往对应于文件中节或段的数量。</p>
+<p>访问这两个表就需要我们借助ELF文件头中的信息。</p>
+<p>以<code>exercise1.2</code>中访问节头表为例，先用<code>e_shoff</code>加上文件的起始地址，访问节头表的基地址；然后以<code>e_shentsize</code>作偏移，依次访问每一个节头表项，而节头表项的数量从<code>e_shnum</code>即可得知。</p>
+<h2 id="难点二-实战printf"><a href="#难点二-实战printf" class="headerlink" title="难点二 实战printf"></a>难点二 实战printf</h2><h3 id="处理长参数表"><a href="#处理长参数表" class="headerlink" title="处理长参数表"></a>处理长参数表</h3><p>这个其实并不难，按照指导书提供的参数表格式依次处理就好。</p>
+<p>需要注意的是对于参数的初始化，如<code>width = prec = 0, padc = &#39; &#39;</code>等。</p>
+<h3 id="补充打印整数部分"><a href="#补充打印整数部分" class="headerlink" title="补充打印整数部分"></a>补充打印整数部分</h3><p>这部分也不难，相对其他部分，引入了<code>negFlag</code>这一变量，只需先对打印的参数进行判断，若为负数则将其变为正数并置<code>negFlag</code>为1。</p>
+<h3 id="阅读代码并分析函数功能"><a href="#阅读代码并分析函数功能" class="headerlink" title="阅读代码并分析函数功能"></a>阅读代码并分析函数功能</h3><p>这一部分应该是完成<code>exercise1.5</code>的前置功课，这才是最难的部分，真正实操的部分反而简单。</p>
+<p>一些宏函数和变量类型：</p>
+<ul>
+<li><code>va_list</code></li>
+<li><code>va_start</code></li>
+<li><code>va_arg</code></li>
+<li><code>va_end</code></li>
+</ul>
+<p>以及三个<code>local help functions</code></p>
+<ul>
+<li><code>PrintNum</code></li>
+<li><code>PrintChar</code></li>
+<li><code>PrintString</code></li>
+</ul>
+<h1 id="实验心得与总结"><a href="#实验心得与总结" class="headerlink" title="实验心得与总结"></a>实验心得与总结</h1><p>总的来说这一次实验总体难度水平中等偏难，相对于Lab0的入门实验，难度肯定是有了较大的提升。但是作为后续实验的基础来说，后续的实验只会更难。</p>
+<p>在刚开始阅读指导书的时候，什么都不知道，一头雾水。能把每个分散的exercise做好，但是对整体的知识体系结构还是一无所知。</p>
+<p>在完成printf实战之后再回头梳理整个脉络后，就会对Lab1的整体结构有个较为清楚的把握。</p>
+<p>以总的<code>Makefile</code>为基础，可以将Lab1的几乎所有文件夹串联起来：</p>
+<ul>
+<li><p><code>boot</code>文件夹中的<code>start.S</code>主要与启动相关，负责初始化硬件，设置堆栈入口，以及跳转到<code>main</code>函数</p>
+</li>
+<li><p><code>drivers</code>文件夹主要与外部硬件设备相关，如实现输出字符的地址定义就在这里<code>console.c</code>文件中</p>
+</li>
+<li><p><code>include</code>文件夹主要包括了一些库函数，宏定义文件</p>
+</li>
+<li><p><code>lib</code>文件夹则是包含了实现<code>printf</code>的文件</p>
+</li>
+<li><p><code>tools</code>文件夹中是负责链接的文件，定义了内核入口地址</p>
+</li>
+<li><p><code>init</code>文件夹中则是初始化和<code>main</code>函数文件，在Lab1中体现不多，在Lab2则是重点</p>
+</li>
+<li><p><code>readelf</code>则是为了让我们手写函数去解析ELF文件</p>
+</li>
+<li><p><code>gxemul</code>中是仿真器的位置</p>
+</li>
+</ul>
+<p>理解以后自然觉得不难，这样梳理以后就会对整体结构清晰很多。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MOS/">#MOS</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/15/Lab02/" title="Lab02">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Lab02</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/22/Lab00/" title="Lab00">
+                        <span class="hidden-mobile">Lab00</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'boxy-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Fieldry/fieldry.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

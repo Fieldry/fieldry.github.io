@@ -1,0 +1,799 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Akai">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="BUAA OS Lab03 实验报告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lab03">
+<meta property="og:url" content="https://fieldry.github.io/2022/04/26/Lab03/index.html">
+<meta property="og:site_name" content="Akai">
+<meta property="og:description" content="BUAA OS Lab03 实验报告">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://fieldry.github.io/img/Lab03/4.1.jpg">
+<meta property="og:image" content="https://fieldry.github.io/img/Lab03/4.2.jpg">
+<meta property="og:image" content="https://fieldry.github.io/img/Lab03/异常处理.png">
+<meta property="og:image" content="https://fieldry.github.io/img/Lab03/env_create.png">
+<meta property="og:image" content="https://fieldry.github.io/img/Lab03/异常处理.png">
+<meta property="article:published_time" content="2022-04-26T11:45:00.000Z">
+<meta property="article:modified_time" content="2022-06-01T08:41:32.698Z">
+<meta property="article:author" content="Akai">
+<meta property="article:tag" content="MOS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fieldry.github.io/img/Lab03/4.1.jpg">
+  
+  
+  
+  <title>Lab03 - Akai</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"fieldry.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 80vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Akai&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Friends
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Lab03"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-26 19:45" pubdate>
+          April 26, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Lab03</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h2 id="thinking-3-1"><a href="#thinking-3-1" class="headerlink" title="thinking 3.1"></a>thinking 3.1</h2><p>MOS中目前使用的<code>envid</code>是由三部分构成：</p>
+<ul>
+<li>第0-9位：当前进程在<code>envs</code>数组中偏移量，因为共有1024个<code>env</code>，故这部分占据10位</li>
+<li>第10位：1</li>
+<li>第11-16位：6位的<code>ASID</code></li>
+</ul>
+<p>低10位是不会出错的，这一步需要判断高7位是否符合<code>envid</code>的规则，以及<code>ASID</code>是否和低10位偏移量对应。</p>
+<h2 id="thinking-3-2"><a href="#thinking-3-2" class="headerlink" title="thinking 3.2"></a>thinking 3.2</h2><ul>
+<li><p>UTOP以下的区域是可读写区域，UTOP-ULIM间的区域是只读区域</p>
+</li>
+<li><p>自映射：</p>
+<ul>
+<li><code>UVPT</code>以上到<code>ULIM</code>之间，是一个4MB的空间，正好满足对整个4GB进程空间的自映射。</li>
+<li>在根据页目录，以这4MB空间内的虚拟地址访问页表时，得到的<code>env_cr3</code>正是</li>
+</ul>
+</li>
+<li><p>物理地址和虚拟地址：</p>
+<ul>
+<li>在MOS中，物理内存为64MB，这是所有进程共享的</li>
+<li>对于<code>kuseg, kseg0</code>部分虚拟地址的访问，最终都是落到了访问对应的物理地址。物理地址是真正存储数据的地方</li>
+<li>32位操作系统，虚拟内存共4GB，分为用户空间和内核空间。其中<code>kuseg</code>是用户空间，共2GB；<code>kseg0</code>是内核空间的一部分，也是内核空间中我们目前接触最多的部分，其大小为512MB</li>
+<li>在<code>kuseg</code>空间中，通过二级页表机制将虚拟地址映射到不同的物理页；在<code>kseg0</code>空间中，通过将最高位抹去，直接映射到固定的物理页</li>
+<li>所有进程共享内核所在的2GB空间</li>
+</ul>
+</li>
+</ul>
+<h2 id="thinking-3-3"><a href="#thinking-3-3" class="headerlink" title="thinking 3.3"></a>thinking 3.3</h2><p><code>user_data</code>为调用<code>load_icode</code>函数时传入的进程参数<code>e</code></p>
+<h2 id="thinking-3-4"><a href="#thinking-3-4" class="headerlink" title="thinking 3.4"></a>thinking 3.4</h2><p>根据<code>va</code>和<code>va + bin_size</code>是否页对齐，可以分为四种情况：</p>
+<ul>
+<li><p><code>va</code>为页对齐，这种情况较为简单</p>
+</li>
+<li><p><code>va</code>不是页对齐，其中<code>offset = va - ROUNDDOWN(va, BY2PG)</code>，则从<code>va--ROUND(va, BY2PG)</code>这段区间需要单独加载，首先需要考虑<code>va</code>是否和物理页面有映射关系，如果有，则需要找到对应的物理页面；否则需要分配一个新的物理页</p>
+<p><img src="/img/Lab03/4.1.jpg" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p><code>va + bin_size</code>为页对齐</p>
+</li>
+<li><p><code>va + bin_size</code>非页对齐，此时<code>offset = va + i - ROUNDDOWN(va + i, BY2PG)</code>，则从<code>ROUNDDOWN(va + i, BY2PG)--va + i</code>这段区间需要单独加载，即用offset代替BY2PG作为加载的size</p>
+<p><img src="/img/Lab03/4.2.jpg" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<h2 id="thinking-3-5"><a href="#thinking-3-5" class="headerlink" title="thinking 3.5"></a>thinking 3.5</h2><ul>
+<li><p>虚拟地址。</p>
+</li>
+<li><p>每个进程不一样。</p>
+</li>
+<li><blockquote>
+<p><code>e_entry</code>：此字段指明程序入口的虚拟地址。即当文件被加载到进程空间里后，入口程序在进程地址空间里的地址。对于可执行程序文件来说，当 ELF 文件完成加载之 后，程序将从这里开始运行；而对于其它文件来说，这个值应该是 0。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="thinking-3-6"><a href="#thinking-3-6" class="headerlink" title="thinking 3.6"></a>thinking 3.6</h2><p><code>epc</code>是<code>CP0</code>寄存器组中记录异常发生地址的寄存器。在发生中断时，<code>CPU</code>会将发生中断的地址存入该寄存器。</p>
+<p>在<code>env_pop_tf()</code>函数中，最后会跳转到进程的<code>pc</code>寄存器，但是在进程切换中，实际跳转的地方应该是<code>epc</code>寄存器，故要将<code>pc</code>寄存器中的值设置为<code>epc</code>。</p>
+<h2 id="thinking-3-7"><a href="#thinking-3-7" class="headerlink" title="thinking 3.7"></a>thinking 3.7</h2><ul>
+<li>在宏<code>SAVE_ALL</code>中，将当前进程的上下文存到<code>TIMESTACK</code></li>
+<li>是内核区域中不同的栈区域，当出现时钟中断时，存储的区域为<code>TIMESTACK</code>，对于其它异常，存储区域为<code>KERNEL_SP</code></li>
+</ul>
+<h2 id="thinking-3-8"><a href="#thinking-3-8" class="headerlink" title="thinking 3.8"></a>thinking 3.8</h2><ul>
+<li><code>handle_int: lib/genex.S</code></li>
+<li><code>handle_mod, handle_tlb: lib/genex.S</code>，抽象成了函数<code>handle_\exception</code></li>
+<li><code>handle_sys: lib/syscall.S</code></li>
+</ul>
+<h2 id="thinking-3-9"><a href="#thinking-3-9" class="headerlink" title="thinking 3.9"></a>thinking 3.9</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell">.macro  setup_c0_status set clr<br>//定义了一个宏，将状态寄存器修改为设定值，若clr置1则清零<br>	.set    push<br>    mfc0    t0, CP0_STATUS<br>    or      t0, \set|\clr<br>    xor     t0, \clr<br>    mtc0    t0, CP0_STATUS<br>    .set    pop<br>.endm<br><br>LEAF(set_timer)<br>        li t0, 0xc8						//t0 &lt;- 200<br>        sb t0, 0xb5000100				//将时钟中断设置为200次<br>        sw sp, KERNEL_SP				//KERNEL_SP &lt;- sp, 将当前栈内容存入内核栈指针处<br>setup_c0_status STATUS_CU0|0x1001 0		//CP0_STATUS &lt;- STATUS_CU0|0x1001=0x10001001<br>        jr ra							//<br>        nop<br>END(set_timer)<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">timer_irq:<br>	sb zero, 0xb5000110					//关闭时钟中断<br>1:  j       sched_yield					//调用sched_yield函数<br>    nop<br>    /*li t1, 0xff<br>    lw    t0, delay<br>    addu  t0, 1<br>    sw      t0, delay<br>    beq     t0,t1,1f<br>    nop*/<br>    j       ret_from_exception			//调用ret_from_exception函数<br>    nop<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="thinking-3-10"><a href="#thinking-3-10" class="headerlink" title="thinking 3.10"></a>thinking 3.10</h2><img src="/img/Lab03/异常处理.png" srcset="/img/loading.gif" lazyload style="zoom:150%;" />
+
+<p>当发生时钟中断，先通过<code>except_vec3</code>异常分发进入对应处理异常函数，在本次实验中为中断处理函数<code>handle_int</code>。然后通过一些处理，比如保存现场等，之后通过判断中断码进入相应的中断服务函数，本次实验中为<code>timer_irq</code>。在该函数中主要工作为调用<code>sched_yield</code>函数调度进程，在该函数中会通过进程的优先级切换进程并运行，这便是根据时钟周期切换进程。</p>
+<h1 id="实验难点"><a href="#实验难点" class="headerlink" title="实验难点"></a>实验难点</h1><h2 id="进程创建流程及函数调用图"><a href="#进程创建流程及函数调用图" class="headerlink" title="进程创建流程及函数调用图"></a>进程创建流程及函数调用图</h2><p><img src="/img/Lab03/env_create.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="进程创建相关函数"><a href="#进程创建相关函数" class="headerlink" title="进程创建相关函数"></a>进程创建相关函数</h2><h3 id="env-create"><a href="#env-create" class="headerlink" title="env_create"></a><code>env_create</code></h3><p><strong>位置</strong>：<code>lib/env.c</code></p>
+<p><strong>说明</strong>：创建进程</p>
+<h3 id="env-create-priority"><a href="#env-create-priority" class="headerlink" title="env_create_priority"></a><code>env_create_priority</code></h3><p><strong>位置</strong>：<code>lib/env.c</code></p>
+<p><strong>说明</strong>：创建进程</p>
+<h3 id="env-alloc"><a href="#env-alloc" class="headerlink" title="env_alloc"></a><code>env_alloc</code></h3><p><strong>位置</strong>：<code>lib/env.c</code></p>
+<p><strong>说明</strong>：</p>
+<ul>
+<li>调用<code>env_setup_vm</code>函数，为进程分配页目录并完成部分映射</li>
+<li>初始化对应PCB，主要包括<code>env_id, env_parent_id, env_status, env_runs, env_tf.cp0_status, env_tf.regs[29]</code></li>
+<li>将进程从空闲链表中移出，加入调度队列(这和物理内存管理的页链表管理体系很类似)</li>
+</ul>
+<h3 id="env-setup-vm"><a href="#env-setup-vm" class="headerlink" title="env_setup_vm"></a><code>env_setup_vm</code></h3><p><strong>位置</strong>：<code>lib/env.c</code></p>
+<p><strong>说明</strong>：</p>
+<ul>
+<li><p>为进程的页目录分配物理页</p>
+</li>
+<li><p>以<code>UTOP</code>为界，将用户空间分别映射，映射的模板是之前虚拟内存初始化时得到的<code>boot_pgdir</code></p>
+<ul>
+<li><p><code>0--UTOP</code>间的用户空间是可读写的，且各个进程在这部分的内容是各不一样的，因此在该函数中我们将其全部清零</p>
+</li>
+<li><p><code>UTOP--UTPV</code>间的用户空间是存储<code>pages, envs</code>结构体数组的，这也是在之前虚拟内存初始化时完成映射的，这样在用户空间就可以访问到这两个数组。这部分对于所有进程都是相同的，因此我们以<code>boot_pgdir</code>为模板完成映射</p>
+</li>
+<li><p><code>UVPT--UTOP</code>间的用户空间是用来自映射的，这部分4MB空间正好可以映射整个4GB虚拟内存空间，我们用以下代码来初始化这块空间：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">e-&gt;env_pgdir = pgdir;<br>e-&gt;env_cr3 = PADDR(e-&gt;env_pgdir);<br>e-&gt;env_pgdir[PDX(UVPT)] = e-&gt;env_cr3 | PTE_V;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>UTOP</code>以上的空间不属于用户空间，也是用户态无法访问的内存空间</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="进程加载相关函数"><a href="#进程加载相关函数" class="headerlink" title="进程加载相关函数"></a>进程加载相关函数</h2><h3 id="load-icode"><a href="#load-icode" class="headerlink" title="load_icode"></a><code>load_icode</code></h3><p><strong>位置</strong>：<code>lib/env.c</code></p>
+<p><strong>说明</strong>：</p>
+<ul>
+<li>分配物理页，并完成从用户栈空间到该物理页的映射</li>
+<li>通过<code>load_elf</code>函数完成文件二进制数据到用户空间的映射</li>
+<li>设置进程的入口，该入口地址通过上面的<code>load_elf</code>函数获得</li>
+</ul>
+<h3 id="load-elf"><a href="#load-elf" class="headerlink" title="load_elf"></a><code>load_elf</code></h3><p><strong>位置</strong>：<code>lib/kernel_elfloader.c</code></p>
+<p><strong>说明</strong>：分段调用<code>load_icode_mapper</code>函数完成映射</p>
+<h3 id="is-elf-format"><a href="#is-elf-format" class="headerlink" title="is_elf_format"></a><code>is_elf_format</code></h3><p><strong>位置</strong>：<code>lib/kernel_elfloader.c</code></p>
+<p><strong>说明</strong>：判断文件是否符合<code>ELF</code>文件格式</p>
+<h3 id="load-icode-mapper"><a href="#load-icode-mapper" class="headerlink" title="load_icode_mapper"></a><code>load_icode_mapper</code></h3><p><strong>位置</strong>：<code>lib/env.c</code></p>
+<p><strong>说明</strong>：将文件二进制数据映射到用户空间</p>
+<h2 id="时钟中断处理图"><a href="#时钟中断处理图" class="headerlink" title="时钟中断处理图"></a>时钟中断处理图</h2><img src="/img/Lab03/异常处理.png" srcset="/img/loading.gif" lazyload style="zoom:150%;" />
+
+<h2 id="异常处理相关函数"><a href="#异常处理相关函数" class="headerlink" title="异常处理相关函数"></a>异常处理相关函数</h2><h3 id="except-vec3"><a href="#except-vec3" class="headerlink" title="except_vec3"></a><code>except_vec3</code></h3><p><strong>位置</strong>：<code>boot/start.S</code></p>
+<p><strong>说明</strong>：负责异常分发，根据状态寄存器的<code>ExCode</code>跳转到对应的异常处理函数</p>
+<h3 id="handle-exception"><a href="#handle-exception" class="headerlink" title="handle_\exception"></a><code>handle_\exception</code></h3><p><strong>位置</strong>：<code>lib/genex.S</code></p>
+<p><strong>说明</strong>：异常处理函数</p>
+<h3 id="timer-irq"><a href="#timer-irq" class="headerlink" title="timer_irq"></a><code>timer_irq</code></h3><p><strong>位置</strong>：<code>lib/genex.S</code></p>
+<p><strong>说明</strong>：时钟中断的处理函数</p>
+<h3 id="sched-yield"><a href="#sched-yield" class="headerlink" title="sched_yield"></a><code>sched_yield</code></h3><p><strong>位置</strong>：<code>lib/sched.c</code></p>
+<p><strong>说明</strong>：调度函数</p>
+<h3 id="env-run"><a href="#env-run" class="headerlink" title="env_run"></a><code>env_run</code></h3><p><strong>位置</strong>：<code>lib/env.c</code></p>
+<p><strong>说明</strong>：运行进程</p>
+<h3 id="ret-from-exception"><a href="#ret-from-exception" class="headerlink" title="ret_from_exception"></a><code>ret_from_exception</code></h3><p><strong>位置</strong>：<code>lib/genex.S</code></p>
+<p><strong>说明</strong>：恢复现场</p>
+<h2 id="异常处理相关宏定义"><a href="#异常处理相关宏定义" class="headerlink" title="异常处理相关宏定义"></a>异常处理相关宏定义</h2><h3 id="SAVE-ALL"><a href="#SAVE-ALL" class="headerlink" title="SAVE_ALL"></a><code>SAVE_ALL</code></h3><p><strong>位置</strong>：<code>include/stackframe.h</code></p>
+<p><strong>位置</strong>：<code>boot/start.S</code></p>
+<p><strong>说明</strong>：保存现场</p>
+<h3 id="RESTORE-SOME-ALL"><a href="#RESTORE-SOME-ALL" class="headerlink" title="RESTORE_SOME/ALL"></a><code>RESTORE_SOME/ALL</code></h3><p><strong>位置</strong>：<code>include/stackframe.h</code></p>
+<p><strong>说明</strong>：恢复现场</p>
+<h3 id="get-sp"><a href="#get-sp" class="headerlink" title="get_sp"></a><code>get_sp</code></h3><p><strong>位置</strong>：<code>include/stackframe.h</code></p>
+<p><strong>说明</strong>：获取保存现场的栈指针</p>
+<h3 id="STI"><a href="#STI" class="headerlink" title="STI"></a><code>STI</code></h3><p><strong>位置</strong>：<code>include/stackframe.h</code></p>
+<p><strong>说明</strong>：开启全局中断使能</p>
+<h3 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a><code>CLI</code></h3><p><strong>位置</strong>：<code>include/stackframe.h</code></p>
+<p><strong>说明</strong>：禁用全局中断</p>
+<h1 id="总结与反思"><a href="#总结与反思" class="headerlink" title="总结与反思"></a>总结与反思</h1><p>本次实验重点就是进程的创建和调度，以及简单异常的处理。</p>
+<p>相关函数相比之前增加了很多，导致理清函数的调用关系成为了一个重点和前提，否则难以理清逻辑，更别谈去完成所有的函数了。</p>
+<p>因此在反复学习指导书和阅读代码之后，在自己理解的基础上画了两个思维导图，以理清逻辑关系。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MOS/">#MOS</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/01/Lab04/" title="Lab04">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Lab04</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/15/Lab02/" title="Lab02">
+                        <span class="hidden-mobile">Lab02</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'boxy-light';
+      var dark = 'dark-blue';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Fieldry/fieldry.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
