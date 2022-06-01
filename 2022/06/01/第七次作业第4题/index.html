@@ -16,22 +16,22 @@
   <meta name="author" content="Akai">
   <meta name="keywords" content="">
   
-    <meta name="description" content="BUAA OS Lab04 实验报告">
+    <meta name="description" content="北京地铁乘坐线路查询(202205)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lab04">
-<meta property="og:url" content="https://fieldry.github.io/2022/06/01/Lab04/index.html">
+<meta property="og:title" content="第七次作业第4题">
+<meta property="og:url" content="https://fieldry.github.io/2022/06/01/%E7%AC%AC%E4%B8%83%E6%AC%A1%E4%BD%9C%E4%B8%9A%E7%AC%AC4%E9%A2%98/index.html">
 <meta property="og:site_name" content="Akai">
-<meta property="og:description" content="BUAA OS Lab04 实验报告">
+<meta property="og:description" content="北京地铁乘坐线路查询(202205)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-06-01T05:49:44.000Z">
-<meta property="article:modified_time" content="2022-06-01T09:06:23.518Z">
+<meta property="article:published_time" content="2022-06-01T09:04:49.000Z">
+<meta property="article:modified_time" content="2022-06-01T09:05:55.969Z">
 <meta property="article:author" content="Akai">
-<meta property="article:tag" content="MOS">
+<meta property="article:tag" content="Data Structure">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Lab04 - Akai</title>
+  <title>第七次作业第4题 - Akai</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -194,7 +194,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Lab04"></span>
+            <span id="subtitle" data-typed-text="第七次作业第4题"></span>
           
         </div>
 
@@ -205,7 +205,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-06-01 13:49" pubdate>
+        <time datetime="2022-06-01 17:04" pubdate>
           June 1, 2022 pm
         </time>
       </span>
@@ -217,7 +217,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          868 words
         
       </span>
     
@@ -228,7 +228,7 @@
         
         
         
-          1 mins
+          8 mins
         
       </span>
     
@@ -270,11 +270,64 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Lab04</h1>
+            <h1 style="display: none">第七次作业第4题</h1>
             
             <div class="markdown-body">
               
-              
+              <h1 id="21级数据结构第七次作业第4题-北京地铁乘坐线路查询（202205）"><a href="#21级数据结构第七次作业第4题-北京地铁乘坐线路查询（202205）" class="headerlink" title="21级数据结构第七次作业第4题 北京地铁乘坐线路查询（202205）"></a>21级数据结构第七次作业第4题 北京地铁乘坐线路查询（202205）</h1><h2 id="题目要点"><a href="#题目要点" class="headerlink" title="题目要点"></a>题目要点</h2><ul>
+<li><strong>输入</strong>：起始站名和目的站名</li>
+<li><strong>输出</strong>：从起始站到目的站的最短乘坐站换乘线路</li>
+<li><strong>读入文件</strong>：文件宏观看由两部分构成：<ul>
+<li>第一部分，即第一个数，说明文件中地铁线路总数</li>
+<li>第二部分，对于每一条线路，说明其详细信息，其信息同样分为两个部分：<ul>
+<li>第一小部分，就是每部分第一行两个数，分别是线路编号，和文件中列出的该条线路的地铁站数量（与该线路中实际地铁站数并不等价，下面会说到）</li>
+<li>第二小部分，就是说明了每个地铁站的名字，和是否为换乘站</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>输出信息</strong>：<ul>
+<li>路径</li>
+<li>地铁站名称</li>
+<li>地铁线路号</li>
+<li>乘坐站数</li>
+</ul>
+</li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><blockquote>
+<ul>
+<li>若某条地铁线为环线，则首站与末站信息相同（如北京地铁2号线，首站信息“西直门 1” ，末站信息为“西直门 1”）</li>
+</ul>
+</blockquote>
+<p>​		因此，对于2号线，实际只有18个地铁站，但是文件中列出了19个站，首尾是一样的，这点需要特殊判断</p>
+<ul>
+<li>对于有多条长度一样的线路，输出其中任意一条就好</li>
+<li>注意输出格式，括号外为地铁线路，括号内为乘坐的站数</li>
+</ul>
+<h2 id="数据结构及算法"><a href="#数据结构及算法" class="headerlink" title="数据结构及算法"></a>数据结构及算法</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>题目要求使用<code>Dijkstra</code>算法</p>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><ul>
+<li>观察可得，地铁线路图是稀疏图，大部分都是度为2的点，因此考虑使用邻接表存储</li>
+<li>邻接表的具体实现方式采用的是<strong>链式前向星</strong>（这个百度搜索可以找到很多教程，这里不再赘述）</li>
+<li>每个结点，即每个地铁站，用结构体保存相应信息（也可以每条线路建立一个结构体，保存所有的地铁站，但是不建议，因为不方便存储换乘信息）</li>
+<li>采用了堆优化（可选项，对于这个数据量优化意义不大）</li>
+</ul>
+<h2 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h2><h3 id="读入文件"><a href="#读入文件" class="headerlink" title="读入文件"></a>读入文件</h3><ul>
+<li>保存每个站的信息，如名称，是否可换乘</li>
+<li>用邻接表保存地铁站之间的关系，即保存图的边</li>
+<li>注意换乘信息如何保存以便于后续对图的遍历</li>
+</ul>
+<h3 id="寻找线路"><a href="#寻找线路" class="headerlink" title="寻找线路"></a>寻找线路</h3><p>这个应该难度不大，<code>Dijkstra</code>算法的简单应用</p>
+<p>注意在过程中维护路径，用于后续输出答案</p>
+<h3 id="输出答案"><a href="#输出答案" class="headerlink" title="输出答案"></a>输出答案</h3><ul>
+<li>输出起始站，换乘站和终点站的名称，这个在读入时需要保存</li>
+<li>输出乘坐的线路和站数<ul>
+<li>站数不难计算，在回溯路径时计数就好</li>
+<li>线路信息是可以保存在站结点的结构体中</li>
+<li>稍微复杂的是如何判断在哪一站换乘，通过“两点确定一条直线(地铁线)”，分别判断当前站和下一站位于哪一条线路上，如果线路不一样，就是到了换乘站</li>
+</ul>
+</li>
+</ul>
+
               
             </div>
             <hr/>
@@ -291,7 +344,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/MOS/" class="category-chain-item">MOS</a>
+  <a href="/categories/DS/" class="category-chain-item">DS</a>
   
   
 
@@ -306,7 +359,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/MOS/">#MOS</a>
+        <a href="/tags/Data-Structure/">#Data Structure</a>
       
     </div>
   
@@ -320,18 +373,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/01/%E7%AC%AC%E4%B8%83%E6%AC%A1%E4%BD%9C%E4%B8%9A%E7%AC%AC4%E9%A2%98/" title="第七次作业第4题">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">第七次作业第4题</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/26/Lab03/" title="Lab03">
-                        <span class="hidden-mobile">Lab03</span>
+                      <a href="/2022/06/01/Lab04/" title="Lab04">
+                        <span class="hidden-mobile">Lab04</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
