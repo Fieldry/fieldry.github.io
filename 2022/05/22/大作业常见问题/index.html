@@ -24,7 +24,7 @@
 <meta property="og:description" content="数据结构大作业常见问题总结">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-22T07:22:00.000Z">
-<meta property="article:modified_time" content="2022-06-09T03:04:01.103Z">
+<meta property="article:modified_time" content="2022-06-23T03:58:49.721Z">
 <meta property="article:author" content="Akai">
 <meta property="article:tag" content="DS">
 <meta name="twitter:card" content="summary_large_image">
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k words
+          2.4k words
         
       </span>
     
@@ -407,6 +407,13 @@
 </li>
 <li>
 <p>用<code>fgets()</code>读入时…建议还是不要用<code>fgets()</code>，用以上两种方法皆可</p>
+</li>
+<li>
+<p>输出时网页序号和标识号的问题</p>
+<ul>
+<li>标识号不一定是<code>1-N</code>的格式，如果是这样的话，那么读标识号将没有任何意义，小数据中符合这个规则只是因为网页数量较少</li>
+<li>序号与标识号右端数字不一定等价，例如<code>1-1000</code>后的文章可能从<code>2-1</code>开始标号</li>
+</ul>
 </li>
 </ul>
 <h2 id="如果本地正确但小数据点全错"><a class="markdownIt-Anchor" href="#如果本地正确但小数据点全错"></a> 如果本地正确，但小数据点全错</h2>
