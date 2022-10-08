@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Akai">
 <meta property="og:description" content="BUAA OS Lab02 实验报告">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://fieldry.github.io/img/Lab02/InkedLIST_INSERT_AFTER_LI.jpg">
-<meta property="og:image" content="https://fieldry.github.io/img/Lab02/pgdir.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/InkedLIST_INSERT_AFTER_LI.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/pgdir.jpg">
 <meta property="article:published_time" content="2022-04-15T07:49:00.000Z">
-<meta property="article:modified_time" content="2022-06-01T09:06:39.290Z">
+<meta property="article:modified_time" content="2022-10-08T04:01:26.756Z">
 <meta property="article:author" content="Akai">
 <meta property="article:tag" content="MOS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fieldry.github.io/img/Lab02/InkedLIST_INSERT_AFTER_LI.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/InkedLIST_INSERT_AFTER_LI.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -287,15 +287,21 @@
 <p>1.使用宏实现链表，不仅可以实现空页的链表管理，也可以实现空进程的链表管理。使用同一套宏可以实现多个链表的管理，大大提高了可重用性。</p>
 <p>2.性能：</p>
 <ol>
-<li>单向链表</li>
+<li>
+<p>单向链表</p>
+<pre><code class="hljs"> 插入操作相对较为简单，因为不需要维护`le_prev`指针，但是性能相差不大
+
+ 删除操作单向链表更复杂，时间复杂度为`O(n)`，双向链表复杂度为`O(1)`
+</code></pre>
+</li>
+<li>
+<p>循环链表</p>
+<pre><code class="hljs"> 插入操作简单，可以在`O(1)`时间内插入链表尾部，双向链表插入尾部复杂度为`O(n)`
+
+ 删除操作与单向链表相同，时间复杂度为`O(n)`
+</code></pre>
+</li>
 </ol>
-<p>​		插入操作相对较为简单，因为不需要维护<code>le_prev</code>指针，但是性能相差不大</p>
-<p>​		删除操作单向链表更复杂，时间复杂度为<code>O(n)</code>，双向链表复杂度为<code>O(1)</code></p>
-<ol start="2">
-<li>循环链表</li>
-</ol>
-<p>​		插入操作简单，可以在<code>O(1)</code>时间内插入链表尾部，双向链表插入尾部复杂度为<code>O(n)</code></p>
-<p>​		删除操作与单向链表相同，时间复杂度为<code>O(n)</code></p>
 <h2 id="thinking-23"><a class="markdownIt-Anchor" href="#thinking-23"></a> thinking 2.3</h2>
 <p>C：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Page_list</span>&#123;</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>            <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Page</span> *<span class="hljs-title">le_next</span>;</span><br>            <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Page</span> **<span class="hljs-title">le_prev</span>;</span><br>        &#125; pp_link;<br>        u_short pp_ref;<br>    &#125;* lh_first;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -360,7 +366,7 @@
 <p>同样为了便于理解，把宏里的参数用<code>Page</code>结构体对应的变量代换得到代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c">LIST_INSERT_AFTER(listpage, page, pp_link) <span class="hljs-keyword">do</span> &#123;     									\<br>    LIST_NEXT((page), pp_link) = LIST_NEXT((listpage), pp_link);						\<br>	<span class="hljs-keyword">if</span>(LIST_NEXT((listpage), pp_link) != <span class="hljs-literal">NULL</span>) 											\<br>        LIST_NEXT((listpage), pp_link)-&gt;pp_link.le_prev = &amp;LIST_NEXT((page), pp_link);  \<br>    LIST_NEXT((listpage), pp_link) = (page); 											\<br>	(page)-&gt;pp_link.le_prev = &amp;LIST_NEXT((listpage), pp_link);							\<br>&#125; <span class="hljs-keyword">while</span>(<span class="hljs-number">0</span>)                                                       <br></code></pre></td></tr></table></figure>
 <p>如图所示:</p>
-<p><img src="/img/Lab02/InkedLIST_INSERT_AFTER_LI.jpg" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/InkedLIST_INSERT_AFTER_LI.jpg" srcset="/img/loading.gif" lazyload alt="InkedLIST_INSERT_AFTER_LI" /></p>
 <h5 id="list_insert_tail"><a class="markdownIt-Anchor" href="#list_insert_tail"></a> LIST_INSERT_TAIL</h5>
 <p>这个相对于前一个函数复杂的地方在于，首先需要判断链表是否为空，若非空则需要从头指针遍历直到最后一个节点，然后再仿照前一个函数将新元素插入尾部元素之后。而遍历是需要循环变量的，在编写这个函数时以为不可以在宏里定义新的变量，因此用<code>LIST_NEXT((page), pp_link)</code>作为循环变量，代换后代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> LIST_INSERT_TAIL(head, page, pp_link) do &#123;                                    		\</span><br><span class="hljs-meta">	<span class="hljs-keyword">if</span> ((LIST_FIRST((head)) == NULL)) LIST_INSERT_HEAD(head, page, pp_link);   				\</span><br><span class="hljs-meta">	<span class="hljs-keyword">else</span> &#123;                                                                  				\</span><br><span class="hljs-meta">		LIST_NEXT((page), pp_link) = LIST_FIRST((head));                               		\</span><br><span class="hljs-meta">		while (LIST_NEXT((LIST_NEXT((page), pp_link)), pp_link) != NULL) &#123;               	\</span><br><span class="hljs-meta">			LIST_NEXT((page), pp_link) = LIST_NEXT((LIST_NEXT((page), pp_link)), pp_link);  \</span><br><span class="hljs-meta">		&#125; 																					\</span><br><span class="hljs-meta">		LIST_NEXT(LIST_NEXT((page), pp_link), pp_link) = (page);                          	\</span><br><span class="hljs-meta">		(page)-&gt;pp_link.le_prev = &amp;LIST_NEXT(LIST_NEXT((page), pp_link), pp_link);      	\</span><br><span class="hljs-meta">		LIST_NEXT((page), pp_link) = NULL;                                         			\</span><br><span class="hljs-meta">	&#125;                      													 				\</span><br><span class="hljs-meta">&#125; while (0)</span><br></code></pre></td></tr></table></figure>
@@ -388,7 +394,7 @@
 <h4 id="二级页表的填写"><a class="markdownIt-Anchor" href="#二级页表的填写"></a> 二级页表的填写</h4>
 <p>这是虚拟内存管理的重点，也是个人认为整个lab2中<strong>最难</strong>的部分。涉及到二级页表的相关知识，以及虚拟地址和物理地址的区别和联系。</p>
 <p>首先借助指导书中的图便于理解二级页表的结构：</p>
-<p><img src="/img/Lab02/pgdir.jpg" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/pgdir.jpg" srcset="/img/loading.gif" lazyload alt="pgdir" /></p>
 <p>整个二级页表的填写分为两个部分，使用两套配对的函数，时间分界点在于<code>page_init()</code>，但是整体过程是类似的：</p>
 <ul>
 <li>有变量<code>va, pa, pgdir, pgdir_entry, pgtable, pgtable_entry</code>，对应关系如上图所示，这些变量都是指明对应的地址，并不是地址里存的实际值</li>
