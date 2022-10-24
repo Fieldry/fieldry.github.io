@@ -16,26 +16,26 @@
   <meta name="author" content="Akai">
   <meta name="keywords" content="">
   
-    <meta name="description" content="BUAA Compiler Lab03 错误处理设计文档">
+    <meta name="description" content="BUAA Compiler Lab04 LLVM IR中间代码生成">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Symbol Table and Exception">
-<meta property="og:url" content="https://fieldry.github.io/2022/09/24/Symbol%20Table%20and%20Exception/index.html">
+<meta property="og:title" content="LLVM_IR">
+<meta property="og:url" content="https://fieldry.github.io/2022/10/24/LLVM-IR/index.html">
 <meta property="og:site_name" content="Akai">
-<meta property="og:description" content="BUAA Compiler Lab03 错误处理设计文档">
+<meta property="og:description" content="BUAA Compiler Lab04 LLVM IR中间代码生成">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/ast.png">
-<meta property="article:published_time" content="2022-09-24T07:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-08T03:48:27.228Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/20221024191002.png">
+<meta property="article:published_time" content="2022-10-24T11:03:37.000Z">
+<meta property="article:modified_time" content="2022-10-24T11:54:21.128Z">
 <meta property="article:author" content="Akai">
 <meta property="article:tag" content="Compiler">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/ast.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/20221024191002.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Symbol Table and Exception - Akai</title>
+  <title>LLVM_IR - Akai</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Symbol Table and Exception"></span>
+            <span id="subtitle" data-typed-text="LLVM_IR"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-24 15:00" pubdate>
-          September 24, 2022 pm
+        <time datetime="2022-10-24 19:03" pubdate>
+          October 24, 2022 pm
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          1.2k words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          15 mins
+          10 mins
         
       </span>
     
@@ -274,113 +274,78 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Symbol Table and Exception</h1>
+            <h1 style="display: none">LLVM_IR</h1>
             
             <div class="markdown-body">
               
-              <h1 id="错误处理和符号表"><a class="markdownIt-Anchor" href="#错误处理和符号表"></a> 错误处理和符号表</h1>
+              <h1 id="llvm-ir-中间代码生成"><a class="markdownIt-Anchor" href="#llvm-ir-中间代码生成"></a> LLVM IR 中间代码生成</h1>
 <h2 id="类的设计"><a class="markdownIt-Anchor" href="#类的设计"></a> 类的设计</h2>
-<h3 id="sysytree"><a class="markdownIt-Anchor" href="#sysytree"></a> <code>SysYTree</code></h3>
+<p><img src="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/20221024191002.png" srcset="/img/loading.gif" lazyload alt="value" /></p>
+<h3 id="value"><a class="markdownIt-Anchor" href="#value"></a> <code>Value</code></h3>
 <ul>
-<li>主要作用：遍历抽象语法树，检查语义。</li>
-<li>成员方法：
+<li>主要作用：llvm中的基类</li>
+</ul>
+<h3 id="type"><a class="markdownIt-Anchor" href="#type"></a> <code>Type</code></h3>
 <ul>
-<li><code>SymbolTable check(SymbolTable table, boolean inLoop)</code>：在遍历过程中对所有语法结点检查语义。</li>
+<li>主要作用：llvm所有类型的基类</li>
+<li>子类：
+<ul>
+<li><code>IntType</code>: 整数类型，包括i32和i1</li>
+<li><code>VoidType</code>: 主要用于占位</li>
+<li><code>ArrayType</code>: 数组类型</li>
+<li><code>PointerType</code>: 指针类型</li>
 </ul>
 </li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/ast.png" srcset="/img/loading.gif" lazyload alt="ast" /></p>
-<h3 id="sysyexception"><a class="markdownIt-Anchor" href="#sysyexception"></a> <code>SysYException</code></h3>
+<h3 id="module"><a class="markdownIt-Anchor" href="#module"></a> <code>Module</code></h3>
 <ul>
-<li>主要作用：错误类，继承自<code>Exception</code>。</li>
-<li>成员属性：
+<li>主要作用：一个Module代表一个文件，本次实验中只需要一个Module即可。</li>
+</ul>
+<h3 id="basicblock"><a class="markdownIt-Anchor" href="#basicblock"></a> <code>BasicBlock</code></h3>
 <ul>
-<li><code>EKind kind</code>：错误种类。</li>
-<li><code>int line</code>：错误所在行。</li>
+<li>主要作用：基本块，部分指令的合集，一个基本块中不应该有跳转和返回指令，一个基本块中的所有指令要么全都执行要么全都不执行。</li>
+</ul>
+<h3 id="instruction"><a class="markdownIt-Anchor" href="#instruction"></a> <code>Instruction</code></h3>
+<ul>
+<li>主要作用：llvm指令的基类。</li>
+<li>子类：
+<ul>
+<li><code>BinaryInst</code></li>
+<li><code>UnaryInst</code></li>
+<li><code>AllocInst</code></li>
+<li><code>BranchInst</code></li>
+<li><code>GetElementPtrInst</code></li>
+<li><code>RetInst</code></li>
+<li><code>LoadInst</code></li>
+<li><code>StoreInst</code></li>
+<li>…</li>
 </ul>
 </li>
 </ul>
-<h3 id="symboltable"><a class="markdownIt-Anchor" href="#symboltable"></a> <code>SymbolTable</code></h3>
+<blockquote>
+<p>更多详细的可以参考<a target="_blank" rel="noopener" href="https://llvm.org/docs/LangRef.html">llvm的官方文档</a>。</p>
+</blockquote>
+<h2 id="递归下降分析"><a class="markdownIt-Anchor" href="#递归下降分析"></a> 递归下降分析</h2>
+<p>该过程就是根据语法分析生成的语法树，递归下降分析，生成llvm中间代码并生成一个新的llvm的数据结构，用于之后的中间代码优化。<br />
+个人递归下降分析的时候是用<code>visit</code>函数，递归分析的时候基本是按照如下模式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (node instance of MyClass)<br>	visit((MyClass) node);<br></code></pre></td></tr></table></figure>
+<p>值得注意的是，对于<code>expression</code>和<code>statement</code>的<code>visit</code>函数可能略有不同：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> Value <span class="hljs-title function_">visit</span><span class="hljs-params">(Expression exp)</span> &#123;&#125;<br><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">visit</span><span class="hljs-params">(Statement stmt)</span> &#123;&#125;<br></code></pre></td></tr></table></figure>
+<p>原因在于对<code>statement</code>的处理只需要生成一条或数条指令即可，但是对于<code>expression</code>的处理应当返回一个结果，用于外层语句的调用。<br />
+比如<code>return a + 2;</code>，对于<code>a + 2</code>的访问应当返回一个<code>value</code>结果，用于生成一条<code>RetInst</code>语句。</p>
+<h2 id="难点"><a class="markdownIt-Anchor" href="#难点"></a> 难点</h2>
+<h3 id="变量声明和存储"><a class="markdownIt-Anchor" href="#变量声明和存储"></a> 变量声明和存储</h3>
+<p>局部变量声明是需要生成<code>AllocInst</code>，结果是一个该变量类型的对应指针类型。<br />
+变量的取值是需要通过<code>LoadInst</code>，从之前<code>AllocInst</code>的结果存储的指针里取出数值。<br />
+变量的存储是将一个新的值存到之前的指针中。<br />
+对一个变量的操作都离不开它的指针，因此我们需要一个新的符号表，将一个<code>Identifier</code>对应到一个指针类型的<code>Value</code>。</p>
+<h3 id="变常量的初始化"><a class="markdownIt-Anchor" href="#变常量的初始化"></a> 变常量的初始化</h3>
+<p>全局变量和常量的初始化一定是编译时可求的值，一般是常数值或者是常量，对于常数值可以单独处理，在编译过程中直接求值；对于常量在访问符号表时获得其常数值然后求值。<br />
+局部变量的初始化通过<code>StoreInst</code>即可解决。</p>
+<h3 id="数组的处理"><a class="markdownIt-Anchor" href="#数组的处理"></a> 数组的处理</h3>
 <ul>
-<li>主要作用：建立符号表，用于错误处理。</li>
-<li>成员属性：
-<ul>
-<li><code>Map&lt;String, SysYSymbol&gt;</code>：根据符号名索引符号节点。</li>
-<li><code>SymbolTable parent</code>：记录父符号表。</li>
-</ul>
-</li>
-<li>成员方法：
-<ul>
-<li><code>SysYSymbol findSymbol(String name)</code>：在当前符号表内查找符号。</li>
-<li><code>SysYSymbol findSymbolInAll(String name)</code>：在当前符号表及所有父符号表中查找符号。</li>
-<li><code>void addSymbol(SysYSymbol symbol)</code>：添加一个符号，若当前符号表中冲突则报错。</li>
-</ul>
-</li>
-</ul>
-<h3 id="writer"><a class="markdownIt-Anchor" href="#writer"></a> <code>Writer</code></h3>
-<ul>
-<li>主要作用：按格式输出错误行数及种类。</li>
-<li>成员属性：
-<ul>
-<li><code>List&lt;Token&gt; tokens</code>：记录该文件所有读入的<code>Token</code>。</li>
-<li><code>String filename</code>：记录输出的文件名。</li>
-<li><code>BufferedWriter bw</code>：用来输出文件内容。</li>
-</ul>
-</li>
-<li>成员方法：
-<ul>
-<li><code>void writeError(SysYException error)</code>：将错误按格式输出到对应文件中。</li>
-</ul>
-</li>
-</ul>
-<h3 id="compiler"><a class="markdownIt-Anchor" href="#compiler"></a> <code>Compiler</code></h3>
-<ul>
-<li>主要作用：主编译器，调用所有类和方法完成编译过程。</li>
-</ul>
-<h2 id="错误处理"><a class="markdownIt-Anchor" href="#错误处理"></a> 错误处理</h2>
-<p>借鉴了<a target="_blank" rel="noopener" href="https://github.com/Coekjan/MIPSysY-Compiler/">叶学长</a>的思路，将错误分为三类，分别在词法分析，语法分析和遍历语法树的过程中处理错误。</p>
-<h3 id="词法分析过程"><a class="markdownIt-Anchor" href="#词法分析过程"></a> 词法分析过程</h3>
-<p>a类错误比较简单，只需遍历一次字符串即可，且与其他错误关系不大，可以在词法分析中完成(当然，在后面完成也是可以的)。</p>
-<h3 id="语法分析过程"><a class="markdownIt-Anchor" href="#语法分析过程"></a> 语法分析过程</h3>
-<p>主要负责处理i，j，k类错误，这三个错误较为类似，与其他错误关系不大，且在生成抽象语法树时不会保存分隔符这些意义不大的信息，因此可以在语法分析过程中处理。</p>
-<h3 id="遍历语法树过程"><a class="markdownIt-Anchor" href="#遍历语法树过程"></a> 遍历语法树过程</h3>
-<p>剩下的复杂的错误都在这个过程中处理。</p>
-<h2 id="基础设计"><a class="markdownIt-Anchor" href="#基础设计"></a> 基础设计</h2>
-<h3 id="基类sysysymbol"><a class="markdownIt-Anchor" href="#基类sysysymbol"></a> 基类<code>SysYSymbol</code></h3>
-<ul>
-<li>需要加入到符号表中的类，包括<code>SysYDef, SysYFuncDef, SysYFuncParam, SysYMainFuncDef</code>。</li>
-<li>定义了抽象方法<code>SymbolKind getKind()</code>，符号种类包括<code>CONST, VARIABLE, FUNCTION, PARAMETER, MAIN_FUNCTION</code>。</li>
-</ul>
-<h3 id="符号表类symboltable"><a class="markdownIt-Anchor" href="#符号表类symboltable"></a> 符号表类<code>SymbolTable</code></h3>
-<ul>
-<li>定义了成员属性<code>STkind kind</code>，符号表种类包括<code>INT_FUNCTION, VOID_FUNCTION, BLOCK</code>。</li>
-<li>每次进入一个新的<code>block</code>时，需要新建一个符号表，根据是否为函数和函数返回类型赋予符号表种类，并与现符号表建立联系。</li>
-</ul>
-<h3 id="基类sysyexpression"><a class="markdownIt-Anchor" href="#基类sysyexpression"></a> 基类<code>SysYExpression</code></h3>
-<ul>
-<li>定义了抽象方法<code>ReturnKind getRetKind()</code>，返回值类型包括<code>VOID, INT, ONE_DIM, TWO_DIM</code>。</li>
-</ul>
-<h2 id="具体实现"><a class="markdownIt-Anchor" href="#具体实现"></a> 具体实现</h2>
-<p>主体函数为<code>SymbolTable check(SymbolTable table, boolean inLoop)</code>，对于每一个语法树结点，传入一个符号表，处理后返回一个符号表。</p>
-<ul>
-<li>b：在当前符号表内加入一个符号，若产生冲突则报错。</li>
-<li>c：在当前符号表及其所有父符号表中查找该符号，若没有结果则报错。</li>
-<li>d，e：
-<ul>
-<li>遇到函数调用时，先搜索符号，若符号不存在或符号不是函数定义类，则报c类错误；</li>
-<li>搜索到之后，判断形参个数与实参个数是否相同，不同则报d类错误；</li>
-<li>再依次判断每个参数的类型是否符号，此处可以调用<code>getRetKind()</code>来判断。</li>
-</ul>
-</li>
-<li>f，g：当进入一个<code>block</code>且该<code>block</code>对应的符号表为函数时，需要进行判断：
-<ul>
-<li>若函数返回类型为<code>int</code>且函数体最后一句不为<code>return</code>，报g类错误；</li>
-<li>若函数返回类型为<code>void</code>且函数体中出现某一句<code>return</code>后有返回值，报f类错误。</li>
-</ul>
-</li>
-<li>h：在赋值语句检查时，若左值查找为常量则报错。</li>
-<li>l：可以类比d类错误，不再赘述。</li>
-<li>m：根据参数<code>inLoop</code>判断，记得在<code>while</code>结点检查时将<code>inLoop</code>设为<code>true</code>。</li>
+<li>数组的处理涉及到<code>ArrayType</code>和<code>PointerType</code>的转换，建议多看标准的llvm工具链如何处理数组然后学习。</li>
+<li>数组的取址需要用到<code>GetElementPtr</code>指令，使用方法非常灵活。在处理二维数组时，建议调用两次该指令，每次降一个维度。可以参考<a target="_blank" rel="noopener" href="https://buaa-se-compiling.github.io/miniSysY-tutorial/lab7/help.html">这里</a></li>
 </ul>
 
               
@@ -428,18 +393,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/24/LLVM-IR/" title="LLVM_IR">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LLVM_IR</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/24/Syntax%20Analysis/" title="Syntax Analysis">
-                        <span class="hidden-mobile">Syntax Analysis</span>
+                      <a href="/2022/09/24/Symbol%20Table%20and%20Exception/" title="Symbol Table and Exception">
+                        <span class="hidden-mobile">Symbol Table and Exception</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

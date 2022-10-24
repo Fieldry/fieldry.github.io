@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>LLVM_IR</title>
+    <link href="/2022/10/24/LLVM-IR/"/>
+    <url>/2022/10/24/LLVM-IR/</url>
+    
+    <content type="html"><![CDATA[<h1 id="llvm-ir-中间代码生成"><a class="markdownIt-Anchor" href="#llvm-ir-中间代码生成"></a> LLVM IR 中间代码生成</h1><h2 id="类的设计"><a class="markdownIt-Anchor" href="#类的设计"></a> 类的设计</h2><p><img src="https://raw.githubusercontent.com/Fieldry/MyImg/main/img/20221024191002.png" alt="value" /></p><h3 id="value"><a class="markdownIt-Anchor" href="#value"></a> <code>Value</code></h3><ul><li>主要作用：llvm中的基类</li></ul><h3 id="type"><a class="markdownIt-Anchor" href="#type"></a> <code>Type</code></h3><ul><li>主要作用：llvm所有类型的基类</li><li>子类：<ul><li><code>IntType</code>: 整数类型，包括i32和i1</li><li><code>VoidType</code>: 主要用于占位</li><li><code>ArrayType</code>: 数组类型</li><li><code>PointerType</code>: 指针类型</li></ul></li></ul><h3 id="module"><a class="markdownIt-Anchor" href="#module"></a> <code>Module</code></h3><ul><li>主要作用：一个Module代表一个文件，本次实验中只需要一个Module即可。</li></ul><h3 id="basicblock"><a class="markdownIt-Anchor" href="#basicblock"></a> <code>BasicBlock</code></h3><ul><li>主要作用：基本块，部分指令的合集，一个基本块中不应该有跳转和返回指令，一个基本块中的所有指令要么全都执行要么全都不执行。</li></ul><h3 id="instruction"><a class="markdownIt-Anchor" href="#instruction"></a> <code>Instruction</code></h3><ul><li>主要作用：llvm指令的基类。</li><li>子类：<ul><li><code>BinaryInst</code></li><li><code>UnaryInst</code></li><li><code>AllocInst</code></li><li><code>BranchInst</code></li><li><code>GetElementPtrInst</code></li><li><code>RetInst</code></li><li><code>LoadInst</code></li><li><code>StoreInst</code></li><li>…</li></ul></li></ul><blockquote><p>更多详细的可以参考<a href="https://llvm.org/docs/LangRef.html">llvm的官方文档</a>。</p></blockquote><h2 id="递归下降分析"><a class="markdownIt-Anchor" href="#递归下降分析"></a> 递归下降分析</h2><p>该过程就是根据语法分析生成的语法树，递归下降分析，生成llvm中间代码并生成一个新的llvm的数据结构，用于之后的中间代码优化。<br />个人递归下降分析的时候是用<code>visit</code>函数，递归分析的时候基本是按照如下模式：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (node instance of MyClass)<br>visit((MyClass) node);<br></code></pre></td></tr></table></figure><p>值得注意的是，对于<code>expression</code>和<code>statement</code>的<code>visit</code>函数可能略有不同：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> Value <span class="hljs-title function_">visit</span><span class="hljs-params">(Expression exp)</span> &#123;&#125;<br><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">visit</span><span class="hljs-params">(Statement stmt)</span> &#123;&#125;<br></code></pre></td></tr></table></figure><p>原因在于对<code>statement</code>的处理只需要生成一条或数条指令即可，但是对于<code>expression</code>的处理应当返回一个结果，用于外层语句的调用。<br />比如<code>return a + 2;</code>，对于<code>a + 2</code>的访问应当返回一个<code>value</code>结果，用于生成一条<code>RetInst</code>语句。</p><h2 id="难点"><a class="markdownIt-Anchor" href="#难点"></a> 难点</h2><h3 id="变量声明和存储"><a class="markdownIt-Anchor" href="#变量声明和存储"></a> 变量声明和存储</h3><p>局部变量声明是需要生成<code>AllocInst</code>，结果是一个该变量类型的对应指针类型。<br />变量的取值是需要通过<code>LoadInst</code>，从之前<code>AllocInst</code>的结果存储的指针里取出数值。<br />变量的存储是将一个新的值存到之前的指针中。<br />对一个变量的操作都离不开它的指针，因此我们需要一个新的符号表，将一个<code>Identifier</code>对应到一个指针类型的<code>Value</code>。</p><h3 id="变常量的初始化"><a class="markdownIt-Anchor" href="#变常量的初始化"></a> 变常量的初始化</h3><p>全局变量和常量的初始化一定是编译时可求的值，一般是常数值或者是常量，对于常数值可以单独处理，在编译过程中直接求值；对于常量在访问符号表时获得其常数值然后求值。<br />局部变量的初始化通过<code>StoreInst</code>即可解决。</p><h3 id="数组的处理"><a class="markdownIt-Anchor" href="#数组的处理"></a> 数组的处理</h3><ul><li>数组的处理涉及到<code>ArrayType</code>和<code>PointerType</code>的转换，建议多看标准的llvm工具链如何处理数组然后学习。</li><li>数组的取址需要用到<code>GetElementPtr</code>指令，使用方法非常灵活。在处理二维数组时，建议调用两次该指令，每次降一个维度。可以参考<a href="https://buaa-se-compiling.github.io/miniSysY-tutorial/lab7/help.html">这里</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Compiler</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Compiler</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Symbol Table and Exception</title>
     <link href="/2022/09/24/Symbol%20Table%20and%20Exception/"/>
     <url>/2022/09/24/Symbol%20Table%20and%20Exception/</url>
