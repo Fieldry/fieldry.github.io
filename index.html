@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Yinghao Zhu</title>
+    <meta name="author" content="Yinghao Zhu">
+    <meta name="description" content="Yinghao Zhu's Homepage">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 0 1.25rem;
+            box-sizing: border-box;
+        }
+
+        header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        header p {
+            margin: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-content img {
+            border-radius: 50%;
+            margin-left: 15px;
+        }
+
+        .intro {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .intro a {
+            text-decoration: none;
+        }
+
+        /* Headings */
+        h1, h2, h3 {
+            font-family: Georgia, serif;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-top: 30px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        p {
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        ol {
+            margin: 10px 0;
+            padding-left: 0;
+            list-style-type: none;
+        }
+
+        section {
+            padding: 0;
+        }
+
+        a {
+            color: #069;
+            text-decoration: underline dotted;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #experience a {
+            text-decoration: none;
+        }
+
+        #experience a:hover {
+            text-decoration: underline;
+        }
+
+        .asset-links span {
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .publication {
+            position: relative;
+            margin: 8px 0;
+            padding-left: 15px;
+            border-left: 6px solid #e8ecf1;
+            transition: border-left-color 0.3s ease;
+        }
+
+        .publication:hover {
+            border-left-color: #b8c6db;
+        }
+
+        .publication .title {
+            font-weight: bold;
+            color: #000;
+            display: block;
+            font-size: 1em;
+        }
+
+        .publication .authors {
+            display: block;
+            font-size: 0.9em;
+        }
+
+        .publication .pub-type {
+            font-style: italic;
+            display: block;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .publication .authors strong {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .experience-item {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+
+        .institute {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .time {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .position {
+            font-style: italic;
+            font-size: 0.9em;
+        }
+
+        footer {
+            font-family: Georgia, serif;
+            text-align: center;
+            width: 100%;
+            font-style: italic;
+            padding: 15px 0;
+            background-color: #f1f1f1;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .time {
+                text-align: left;
+                margin-top: 5px;
+            }
+
+            .publication {
+                margin: 15px 0;
+                padding-left: 10px;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab-button {
+                flex: none;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Publications Tabs */
+        .tabs {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .tab-button {
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            border-radius: 6px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab-button.active {
+            background-color: #2c3e50;
+            color: #fff;
+            border-color: #2c3e50;
+        }
+
+        .tab-button:hover {
+            background-color: #e0e0e0;
+            color: #000;
+        }
+
+        /* Collapsible sections for Services */
+        .collapsible .summary {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .collapsible .summary:hover {
+            background-color: #f0f0f0;
+        }
+
+        .collapsible .detailed {
+            display: none;
+            margin-top: 5px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toggle-icon {
+            font-size: 16px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Zixiang Wang (王子翔)</h1>
+                <!-- <img src="https://s1.imagehub.cc/images/2023/12/09/4b39a6bfda62b617772d6082ee8b21c8.th.png" height="100px" alt="Yinghao Zhu Avatar"> -->
+            </div>
+            <div class="contact-info">
+                <p><strong>Email:</strong> wangzx@stu.pku.edu.com</p>
+                <p><strong>Phone:</strong> (+86) 18949871109</p>
+            </div>
+            <p style="font-family: 'Consolas'";>
+                <a href="hhttps://github.com/Fieldry">GitHub</a>, <a href="https://scholar.google.com/citations?user=U73PSFAAAAAJ">Google Scholar</a>, <a href="https://www.researchgate.net/profile/Zixiang-Wang-13">ResearchGate</a>, <a href="https://openreview.net/profile??id=~Zixiang_Wang1">OpenReview</a>, <a href="https://orcid.org/0009-0000-1257-9580">ORCID</a>
+            </p>
+            <p class="intro">
+                <strong><i>[About Me]</i></strong>
+                I am currently a master student at PKU School of Software & Microelectronics, advised by <a href="http://scholar.pku.edu.cn/malt">Prof. Liantao Ma</a>. My research primarily focuses on <strong>AI for Healthcare</strong>, with emphasis on the following areas: (1) <strong>Medical Large Language Models (LLMs)</strong>: Developing LLM agents and multimodal LLMs for medical applications; and (2) <strong>Healthcare Modeling</strong>: Clinical predictive modeling using electronic health record (EHR) data.
+            </p>
+        </header>
+
+        <section id="education">
+            <h2>Education</h2>
+            <ul>
+                <li>
+                    <div class="experience-item">
+                        <div class="institute"><strong>M.Eng. in Software Engineering</strong>, Peking University, Beijing, China</div>
+                        <div class="time">2025.09 - now</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="experience-item">
+                        <div class="institute"><strong>B.Eng. in Software Engineering</strong>, Beihang University, Beijing, China</div>
+                        <div class="time">2020.09 - 2024.06</div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+
+        <section id="publications">
+            <h2>Publications<div style="margin-left: 10px; font-weight: normal; font-size: 14px; display: inline;">(<sup>*</sup> indicates the equal contributions, <sup>†</sup> indicates the corresponding author.)</div></h2>
+            <!-- Publications Tabs -->
+            <div id="pub-tabs" class="tabs">
+                <button class="tab-button active" data-category="Selected">Selected</button>
+                <button class="tab-button" data-category="LLM">LLM</button>
+                <button class="tab-button" data-category="Healthcare Modeling">Healthcare Modeling</button>
+                <button class="tab-button" data-category="Benchmark/Protocol">Benchmark/Protocol</button>
+                <button class="tab-button" data-category="All">All</button>
+            </div>
+            <ol id="pub-list">
+                <li>
+                    <div class="publication" data-tags="Selected,LLM">
+                        <span class="title">ColaCare: Enhancing Electronic Health Record Modeling through Large Language Model-Driven Multi-Agent Collaboration</span>
+                        <span class="authors"><strong>Zixiang Wang</strong><sup>*</sup>, Yinghao Zhu<sup>*</sup>, Huiya Zhao<sup>*</sup>, Xiaochen Zheng, Tianlong Wang, Wen Tang, Yasha Wang<sup>†</sup>, Chengwei Pan, Ewen M. Harrison, Junyi Gao<sup>†</sup>, Liantao Ma<sup>†</sup></span>
+                        <span class="pub-type">ACM International World Wide Web Conference (WWW), 2025</span>
+                        <div class="asset-links">
+                            <span><a href="https://arxiv.org/abs/2410.02551">Paper</a></span>
+                            <span><a href="https://github.com/PKU-AICare/ColaCare">Code</a></span>
+                            <span><a href="https://colacare.netlify.app">Website</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication" data-tags="Healthcare Modeling">
+                        <span class="title">Learnable Prompt as Pseudo-Imputation: Rethinking the Necessity of Traditional EHR Data Imputation in Downstream Clinical Prediction</span>
+                        <span class="authors">Weibin Liao, Yinghao Zhu, Zhongji Zhang, Yuhang Wang, <strong>Zixiang Wang</strong>, Xu Chu, Yasha Wang<sup>†</sup>, Liantao Ma<sup>†</sup></span>
+                        <span class="pub-type">ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD), 2025</span>
+                        <div class="asset-links">
+                            <span><a href="https://arxiv.org/abs/2401.16796">Paper</a></span>
+                            <span><a href="https://github.com/MrBlankness/PAI">Code</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication" data-tags="Selected,Benchmark/Protocol">
+                        <span class="title">Protocol for Processing Multivariate Time-series Electronic Health Records of COVID-19 Patients</span>
+                        <span class="authors"><strong>Zixiang Wang</strong><sup>*</sup>, Yinghao Zhu<sup>*</sup>, Dehao Sui, Tianlong Wang, Yuntao Zhang, Yasha Wang, Chengwei Pan, Junyi Gao<sup>†</sup>, Liantao Ma<sup>†</sup>, Ling Wang<sup>†</sup>, Xiaoyun Zhang<sup>†</sup></span>
+                        <span class="pub-type">STAR Protocols, 2025</span>
+                        <div class="asset-links">
+                            <span><a href="https://doi.org/10.5281/zenodo.14498936">Code</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication" data-tags="Selected,LLM">
+                        <span class="title">RetCare: Towards Interpretable Clinical Decision Making through LLM-Driven Medical Knowledge Retrieval</span>
+                        <span class="authors"><strong>Zixiang Wang</strong><sup>*</sup>, Yinghao Zhu<sup>*</sup>, Junyi Gao, Xiaochen Zheng, Yuhui Zeng, Yifan He, Bowen Jiang, Wen Tang, Ewen M. Harrison, Chengwei Pan, Liantao Ma<sup>†</sup>, Ling Wang<sup>†</sup></span>
+                        <span class="pub-type">Artificial Intelligence and Data Science for Healthcare: Bridging Data-Centric AI and People-Centric Healthcare (KDD 2024 AIDSH Workshop), 2024</span>
+                        <div class="asset-links">
+                            <span><a href="https://openreview.net/pdf?id=jqo1vk63qE">Paper</a></span>
+                            <span><a href="https://github.com/PKU-AICare/RetCare">Code</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication" data-tags="Selected,Healthcare Modeling">
+                        <span class="title">PRISM: Mitigating EHR Data Sparsity via Learning from Missing Feature Calibrated Prototype Patient Representations</span>
+                        <span class="authors">Yinghao Zhu, <strong>Zixiang Wang</strong>, Long He, Shiyun Xie, Xiaochen Zheng, Liantao Ma<sup>†</sup>, Chengwei Pan<sup>†</sup></span>
+                        <span class="pub-type">ACM International Conference on Information and Knowledge Management (CIKM), 2024</span>
+                        <div class="asset-links">
+                            <span><a href="https://dl.acm.org/doi/10.1145/3627673.3679521">Paper</a></span>
+                            <span><a href="https://github.com/yhzhu99/PRISM">Code</a></span>
+                            <span><a href="https://www.youtube.com/watch?v=_v0h-Izl2V0">Video</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication" data-tags="Selected,LLM">
+                        <span class="title">EMERGE: Enhancing Multimodal Electronic Health Records Predictive Modeling with Retrieval-Augmented Generation</span>
+                        <span class="authors">Yinghao Zhu<sup>*</sup>, Changyu Ren<sup>*</sup>, <strong>Zixiang Wang</strong>, Xiaochen Zheng, Shiyun Xie, Junlan Feng, Xi Zhu, Zhoujun Li, Liantao Ma, Chengwei Pan<sup>†</sup></span>
+                        <span class="pub-type">ACM International Conference on Information and Knowledge Management (CIKM), 2024</span>
+                        <div class="asset-links">
+                            <span><a href="https://dl.acm.org/doi/10.1145/3627673.3679582">Paper</a></span>
+                            <span><a href="https://github.com/yhzhu99/EMERGE">Code</a></span>
+                            <span><a href="https://www.youtube.com/watch?v=gqGX6tzkFtM">Video</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication" data-tags="Selected,Benchmark/Protocol">
+                        <span class="title">A Comprehensive Benchmark For COVID-19 Predictive Modeling Using Electronic Health Records in Intensive Care</span>
+                        <span class="authors">Junyi Gao<sup>*</sup>, Yinghao Zhu<sup>*</sup>, Wenqing Wang<sup>*</sup>, <strong>Zixiang Wang</strong>, Guiying Dong, Wen Tang, Hao Wang, Yasha Wang, Ewen M. Harrison, Liantao Ma<sup>†</sup></span>
+                        <span class="pub-type">Cell Patterns, 2024</span>
+                        <div class="asset-links">
+                            <span><a href="https://www.cell.com/patterns/fulltext/S2666-3899(24)00050-3">Paper</a></span>
+                            <span><a href="https://github.com/yhzhu99/pyehr">Code</a></span>
+                            <span><a href="https://pyehr.netlify.app">Website</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication" data-tags="Benchmark/Protocol">
+                        <span class="title">Protocol to process follow-up electronic medical records of peritoneal dialysis patients to train AI models</span>
+                        <span class="authors">Tianlong Wang<sup>*</sup>, Yinghao Zhu<sup>*</sup>, <strong>Zixiang Wang</strong>, Wen Tang<sup>†</sup>, Xinju Zhao, Tao Wang, Yasha Wang, Junyi Gao<sup>†</sup>, Liantao Ma<sup>†</sup>, Ling Wang<sup>†</sup></span>
+                        <span class="pub-type">STAR Protocols, 2024</span>
+                        <div class="asset-links">
+                            <span><a href="https://www.sciencedirect.com/science/article/pii/S2666166724005008">Paper</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication" data-tags="LLM">
+                        <span class="title">EHRFlow: A Large Language Model-Driven Iterative Multi-Agent Electronic Health Record Data Analysis Workflow</span>
+                        <span class="authors">Hao Wu<sup>*</sup>, Yinghao Zhu<sup>*</sup>, <strong>Zixiang Wang</strong>, Xiaochen Zheng, Ling Wang, Wen Tang, Yasha Wang, Chengwei Pan, Ewen M. Harrison, Junyi Gao<sup>†</sup>, Liantao Ma<sup>†</sup></span>
+                        <span class="pub-type">Artificial Intelligence and Data Science for Healthcare: Bridging Data-Centric AI and People-Centric Healthcare (KDD 2024 AIDSH Workshop), Oral, 2024</span>
+                        <div class="asset-links">
+                            <span><a href="https://openreview.net/pdf?id=lvycHSrFgk">Paper</a></span>
+                            <span><a href="https://github.com/PKU-AICare/EHRFlow">Code</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication" data-tags="Selected,Benchmark/Protocol">
+                        <span class="title">Is larger always better? Evaluating and prompting large language models for non-generative medical tasks.</span>
+                        <span class="authors">Yinghao Zhu<sup>*</sup>, Junyi Gao<sup>*</sup>, <strong>Zixiang Wang</strong><sup>*</sup>, Weibin Liao<sup>*</sup>, Xiaochen Zheng, Lifang Liang, Yasha Wang, Chengwei Pan<sup>†</sup>, Ewen M. Harrison<sup>†</sup>, Liantao Ma<sup>†</sup></span>
+                        <span class="pub-type">Preprint, 2024</span>
+                        <div class="asset-links">
+                            <span><a href="https://arxiv.org/abs/2407.18525">Paper</a></span>
+                            <span><a href="https://github.com/yhzhu99/ehr-llm-benchmark">Code</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication" data-tags="LLM">
+                        <span class="title">Prompting Large Language Models for Zero-Shot Clinical Prediction with Structured Longitudinal Electronic Health Record Data</span>
+                        <span class="authors">Yinghao Zhu<sup>*</sup>, <strong>Zixiang Wang</strong><sup>*</sup>, Junyi Gao, Yuning Tong, Jingkun An, Weibin Liao, Ewen M. Harrison, Liantao Ma<sup>†</sup>, Chengwei Pan<sup>†</sup></span>
+                        <span class="pub-type">Preprint, 2024</span>
+                        <div class="asset-links">
+                            <span><a href="https://arxiv.org/abs/2402.01713">Paper</a></span>
+                            <span><a href="https://github.com/yhzhu99/llm4healthcare">Code</a></span>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+
+        <!-- <section id="awards">
+            <h2>Awards</h2>
+            <ol>
+                <li>
+                    <div class="publication">
+                        <span class="title">Outstanding Graduate of Beijing</span>
+                        <span class="pub-type">Beijing Municipal Education Commission, 2025</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication">
+                        <span class="title">Detecting Active Tuberculosis Bacilli</span>
+                        <span class="authors">Yinghao Zhu, Junyi Gao, Liantao Ma</span>
+                        <span class="pub-type">Top 4 out of all teams, Nightingale Open Science and Wellgen Medical, 2024</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication">
+                        <span class="title">Bias Detection Tools for Clinical Decision Making Challenge</span>
+                        <span class="authors">Yinghao Zhu, Jingkun An, Enshen Zhou, Hao Li, Haoran Feng</span>
+                        <span class="pub-type">Third Place Prize, NIH/NCATS, 2023</span>
+                        <div class="asset-links">
+                            <span><a href="https://github.com/Anjingkun/NIH-Bias-Detection">Code</a></span>
+                            <span><a href="https://yhzhu99.github.io/BeFair">Project</a></span>
+                            <span><a href="https://expeditionhacks.com/bias-detection-healthcare/">Video</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication">
+                        <span class="title">Alibaba Tianchi UNiLAB Algorithm Competition</span>
+                        <span class="authors">Yinghao Zhu, Zhihao Yu, Xianfeng Jiao</span>
+                        <span class="pub-type">Encouragement Award, Top 11 out of 230 teams at Track 1 and Top 10 out of 324 teams at Track 2, 2023</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication">
+                        <span class="title">"Challenge Cup" Competition of Science Achievement in China</span>
+                        <span class="pub-type">Special Prize (Top 1), China Association for Science and Technology, etc, 2023</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication">
+                        <span class="title">High Risk Breast Cancer Prediction Contest 1</span>
+                        <span class="authors">Yinghao Zhu, Junyi Gao, Xinze Li, Yifan He, Wenqing Wang, Liantao Ma</span>
+                        <span class="pub-type">Top 3 out of all teams, Nightingale Open Science, Association for Health Learning & Inference (AHLI), and Providence St. Joseph Health, 2022</span>
+                        <div class="asset-links">
+                            <span><a href="https://github.com/yhzhu99/predict-breast-cancer-phase01">Code</a></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication">
+                        <span class="title">Outstanding Graduate of Beihang University</span>
+                        <span class="pub-type">Beihang University, 2022</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="publication">
+                        <span class="title">"Feng Ru Cup" Competition of Academic and Technological Works</span>
+                        <span class="pub-type">First Prize (Top 1% of all candidates of all majors), Beihang University, 2021, 2022</span>
+                    </div>
+                </li>
+            </ol>
+        </section> -->
+
+
+        <!-- <section id="services">
+            <h2>Services</h2>
+            <h3>Teaching Assistant</h3>
+            <div class="collapsible">
+                <div class="summary">
+                    <span class="summary-text">TA for Algorithms, Operating Systems, Discrete Mathematics, etc.</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <ul class="detailed">
+                    <li>
+                        <div class="experience-item">
+                            <div class="institute">Fundamentals of Programming and Computer Science</div>
+                            <div class="time">Spring 2023</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="experience-item">
+                            <div class="institute">Design and Analysis of Algorithms</div>
+                            <div class="time">Spring 2022, Autumn 2022</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="experience-item">
+                            <div class="institute">Operating System</div>
+                            <div class="time">Autumn 2021</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="experience-item">
+                            <div class="institute">Network Storage</div>
+                            <div class="time">Autumn 2021</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="experience-item">
+                            <div class="institute">System Programming</div>
+                            <div class="time">Spring 2021</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="experience-item">
+                            <div class="institute">Object-oriented Programming</div>
+                            <div class="time">Spring 2021</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="experience-item">
+                            <div class="institute">Discrete Mathematics</div>
+                            <div class="time">Spring 2020, Autumn 2020, Spring 2021</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div> -->
+
+    <footer>
+        <p>© 2025 Yinghao Zhu, Last Updated: March 20, 2025</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a').forEach(link => {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        });
+
+        document.querySelectorAll('#pub-tabs .tab-button').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#pub-tabs .tab-button').forEach(function(b) {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                filterPublications(this.getAttribute('data-category'));
+            });
+        });
+
+        function filterPublications(category) {
+            const pubs = document.querySelectorAll('#pub-list .publication');
+            pubs.forEach(function(pub) {
+                const tags = pub.getAttribute('data-tags') ? pub.getAttribute('data-tags').split(',') : [];
+                if (category === 'All' || tags.includes(category)) {
+                    pub.parentElement.style.display = '';
+                } else {
+                    pub.parentElement.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            filterPublications('Selected');
+        });
+
+        document.querySelectorAll('.collapsible .summary').forEach(function (summary) {
+            summary.addEventListener('click', function() {
+                const detailed = this.nextElementSibling;
+                if (detailed.style.display === 'block') {
+                    detailed.style.display = 'none';
+                    this.querySelector('.toggle-icon').textContent = '▼';
+                } else {
+                    detailed.style.display = 'block';
+                    this.querySelector('.toggle-icon').textContent = '▲';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
