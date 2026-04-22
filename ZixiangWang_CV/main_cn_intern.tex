@@ -1,0 +1,196 @@
+\documentclass[10pt,a4paper]{ctexart}
+
+\usepackage[left=0.5in,right=0.5in,top=0.5in,bottom=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{xcolor}
+\pagenumbering{gobble}
+
+\definecolor{darkred}{RGB}{153,0,0}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkred,
+    urlcolor=darkred,
+    pdftitle={王子翔-实习简历},
+    pdfauthor={王子翔}
+}
+
+\newcommand{\sectiontitle}[1]{
+    \vspace{4mm}
+    {\large\textbf{#1}}
+    \vspace{1mm}
+    \hrule
+    \vspace{3mm}
+}
+
+\newcommand{\entryhead}[2]{
+    {#1} \hfill #2 \\
+}
+
+\newcommand{\projectentry}[4]{
+    \noindent
+    \textbf{#1} \hfill #2 \\
+    {\small #3} \\
+    #4
+    \vspace{2mm}
+}
+
+\newcommand{\pubentry}[4]{
+    \noindent
+    \textbf{#1} \hfill #2 \\
+    #3 \\
+    {\small #4}
+    \vspace{2mm}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5mm}
+\setlist[itemize]{leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt}
+
+\begin{document}
+
+\begin{center}
+{\huge\textbf{王子翔}}\\
+\vspace{2mm}
+\textbf{电话：} 18949871109 \hspace{4mm}
+\textbf{邮箱：} \href{mailto:wangzx@stu.pku.edu.cn}{wangzx@stu.pku.edu.cn} \hspace{4mm}
+\textbf{主页：} \href{https://fieldry.github.io}{fieldry.github.io}
+\end{center}
+
+\sectiontitle{求职意向}
+
+算法实习 / 研究实习（机器学习、大模型、数据挖掘、AI Agent、医疗 AI 方向可灵活适配）
+
+\sectiontitle{教育背景}
+
+\entryhead{\textbf{北京大学}，软件与微电子学院，软件工程硕士}{2024.09 - 至今}
+\begin{itemize}
+    \item 研究方向：AI for Healthcare、医疗大语言模型、电子病历数据建模
+    \item 导师：马连韬
+    \item 可根据投递岗位补充：核心课程、GPA、排名、研究课题关键词
+\end{itemize}
+
+\entryhead{\textbf{北京航空航天大学}，软件学院，软件工程学士}{2019.09 - 2024.06}
+\begin{itemize}
+    \item 系统掌握软件工程、数据结构、算法设计、系统实现等基础能力
+    \item 可根据投递岗位补充：课程成绩、竞赛经历、工程项目
+\end{itemize}
+
+\sectiontitle{个人概述}
+
+我目前主要从事\textbf{大语言模型与数据建模相关研究}，关注\textbf{多智能体协作、检索增强、结构化时序数据建模、模型评测与工作流自动化}。在项目中，我更偏向承担\textbf{问题建模、方法设计、实验实现、代码复现与结果分析}等工作。后续可按岗位需求进一步强化为“算法研究”“LLM 应用”“数据挖掘”或“工程实现”版本。
+
+\sectiontitle{研究 / 项目经历}
+
+\projectentry
+{ColaCare：基于多智能体协作的电子病历建模}
+{2024 - 2025}
+{关键词：LLM Agent、多智能体协作、医疗数据建模、实验设计}
+{
+\begin{itemize}
+    \item 参与面向电子病历场景的多智能体协作框架研究，围绕任务拆解、交互流程与性能提升开展实验。
+    \item 负责或参与模型实验、结果分析、论文整理等工作；可按后续实际贡献补充更具体的技术细节。
+    \item 对外成果发表于 WWW 2025，可作为研究能力与论文产出代表项目。
+\end{itemize}
+}
+
+\projectentry
+{RetCare / EHRFlow：医疗任务中的 LLM 检索与工作流自动化}
+{2024}
+{关键词：RAG、Medical LLM、Workflow、Prompting}
+{
+\begin{itemize}
+    \item 参与围绕医疗知识检索、任务流程设计和自动化分析的项目研究。
+    \item 涉及模型调用、实验配置、评测流程和结果整理等工作。
+    \item 可按投递方向将表述切换为“Agent 工作流设计”“Prompt 与检索增强”“实验平台搭建”等版本。
+\end{itemize}
+}
+
+\projectentry
+{EHR 预测建模与评测基准}
+{2023 - 至今}
+{关键词：时间序列 EHR、临床预测、缺失值处理、Benchmark}
+{
+\begin{itemize}
+    \item 持续参与电子病历时序数据建模、预测任务评测与协议整理等工作。
+    \item 相关成果覆盖 PRISM、EMERGE、Protocol、Benchmark 等项目，兼具方法研究与规范化数据处理经验。
+    \item 可针对岗位重点突出“表格时序建模”“数据清洗与特征工程”“训练评测 pipeline”能力。
+\end{itemize}
+}
+
+\sectiontitle{实习经历（待补充）}
+
+\projectentry
+{实习经历占位 1}
+{时间待补充}
+{公司 / 团队 / 岗位待补充}
+{
+\begin{itemize}
+    \item 建议补充 3 条以内高质量 bullet，优先描述目标、方法、结果和指标。
+    \item 尽量量化：模型效果提升、系统吞吐、数据规模、业务指标、上线范围等。
+    \item 若涉及大模型应用，建议明确 prompt、agent、RAG、评测、部署中的具体职责。
+\end{itemize}
+}
+
+\projectentry
+{实习经历占位 2}
+{时间待补充}
+{公司 / 团队 / 岗位待补充}
+{
+\begin{itemize}
+    \item 若后续有工程向经历，可强调数据 pipeline、训练框架、推理服务、评测平台等内容。
+    \item 若后续有研究向经历，可强调课题问题定义、方法创新、实验设计和论文产出。
+\end{itemize}
+}
+
+\sectiontitle{代表成果}
+
+\pubentry
+{ColaCare: Enhancing Electronic Health Record Modeling through Large Language Model-Driven Multi-Agent Collaboration}
+{WWW 2025}
+{\textbf{王子翔}$^{\ast}$，朱英豪$^{\ast}$，赵慧雅$^{\ast}$ 等}
+{多智能体协作与 EHR 建模代表成果}
+
+\pubentry
+{ClinicRealm: Re-evaluating Large Language Models with Conventional Machine Learning for Non-Generative Clinical Prediction Tasks}
+{npj Digital Medicine 2026}
+{朱英豪，高峻逸，\textbf{王子翔} 等}
+{围绕 LLM 与传统方法在临床预测任务中的比较与再评估}
+
+\pubentry
+{Prompting Large Language Models for Zero-Shot Clinical Prediction with Structured Longitudinal Electronic Health Record Data}
+{Preprint 2024}
+{朱英豪$^{\ast}$，\textbf{王子翔}$^{\ast}$，高峻逸 等}
+{结构化时序 EHR 与零样本临床预测相关工作}
+
+\sectiontitle{技术栈}
+
+\begin{itemize}
+    \item \textbf{编程与框架：} Python、PyTorch、基础机器学习 / 深度学习实验开发
+    \item \textbf{研究与算法：} 大语言模型应用、Prompting、RAG、多智能体协作、时序 / 表格数据建模
+    \item \textbf{工程能力：} 数据处理、实验管理、结果分析、论文与技术文档整理
+    \item \textbf{后续可补充：} C++ / Java / SQL / Linux / Docker / 分布式训练 / 服务部署等与岗位匹配的技能项
+\end{itemize}
+
+\sectiontitle{荣誉与服务}
+
+\begin{itemize}
+    \item 北京航空航天大学优秀毕业生（2024）
+    \item 国家励志奖学金（2022，2023）
+    \item 课程助教：数据结构与程序设计、离散数学、计算机硬件基础
+    \item 会议审稿：AAAI 2026
+\end{itemize}
+
+\sectiontitle{补充说明}
+
+这份简历当前是\textbf{面向找实习的基础框架}，后续建议优先补充：
+\begin{itemize}
+    \item 真实实习经历及量化结果
+    \item 具体工程项目与代码链接
+    \item 可公开展示的技术栈、比赛、开源贡献
+    \item 针对不同岗位版本的关键词适配
+\end{itemize}
+
+\end{document}
