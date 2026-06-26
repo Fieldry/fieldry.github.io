@@ -284,14 +284,14 @@ function showAllPublications() {
           </div>
 
           <div v-show="activeTab === 'experience'" class="panel-pane">
-            <div class="content-grid">
+            <div class="content-grid stack-grid">
               <TimelineColumn title="Education" :items="education" />
               <TimelineColumn title="Research Trajectory" :items="experience" />
             </div>
           </div>
 
           <div v-show="activeTab === 'honors'" class="panel-pane">
-            <div class="content-grid">
+            <div class="content-grid stack-grid">
               <section class="academic-card section">
                 <div class="section-title-row">
                   <div>

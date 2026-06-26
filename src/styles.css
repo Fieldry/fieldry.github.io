@@ -494,6 +494,10 @@ main {
   align-items: start;
 }
 
+.stack-grid {
+  grid-template-columns: 1fr;
+}
+
 .about-grid {
   grid-template-columns: 1fr;
 }

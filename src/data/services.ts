@@ -36,18 +36,58 @@ export const services: ServiceItem[] = [
       .join(", "),
     year: formatYearRange(teachingAssistantCourses),
   },
-  ...reviewerConferences.map(
-    (conference): ServiceItem => ({
-      uid: `service-reviewer-${conference.uid}`,
-      title: "Reviewer",
-      organization: conference.name,
-      year: conference.year,
-    }),
-  ),
+  ...mergeReviewerConferences(reviewerConferences),
 ];
 
 function formatYearRange(items: Array<{ year: string }>) {
   const years = [...new Set(items.map((item) => item.year))];
 
   return years.join(", ");
+}
+
+function mergeReviewerConferences(conferences: ConferenceService[]) {
+  const conferenceGroups = new Map<string, ConferenceService[]>();
+
+  conferences.forEach((conference) => {
+    const groupKey = stripTrailingYear(conference.name).toLowerCase();
+    const group = conferenceGroups.get(groupKey) ?? [];
+    group.push(conference);
+    conferenceGroups.set(groupKey, group);
+  });
+
+  return [...conferenceGroups.values()].map(
+    (group): ServiceItem => ({
+      uid: `service-reviewer-${group.map((conference) => conference.uid).join("-")}`,
+      title: "Reviewer",
+      organization: formatMergedConferenceNames(group),
+      year: formatYearRange(group),
+    }),
+  );
+}
+
+function formatMergedConferenceNames(conferences: ConferenceService[]) {
+  const names = [...new Set(conferences.map((conference) => conference.name))];
+
+  if (names.length === 1) {
+    return names[0] ?? "";
+  }
+
+  const baseName = stripTrailingYear(names[0]);
+  const years = names
+    .map((name) => name.match(/\b(\d{4})$/)?.[1] ?? "")
+    .filter(Boolean);
+
+  if (
+    baseName &&
+    years.length === names.length &&
+    names.every((name) => stripTrailingYear(name) === baseName)
+  ) {
+    return `${baseName} ${years.join(", ")}`;
+  }
+
+  return names.join(", ");
+}
+
+function stripTrailingYear(value = "") {
+  return value.replace(/\s+\d{4}$/, "").trim();
 }
