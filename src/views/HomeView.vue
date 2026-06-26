@@ -168,28 +168,6 @@ function showAllPublications() {
             <QuickLinks :links="quickLinks" />
           </section>
 
-          <section class="academic-card side-section">
-            <h2 class="side-title">Scholar Snapshot</h2>
-            <div class="stat-grid">
-              <div class="stat-box">
-                <strong>{{ profile.scholarStats.citations }}</strong>
-                <span>Citations</span>
-              </div>
-              <div class="stat-box">
-                <strong>{{ profile.scholarStats.hIndex }}</strong>
-                <span>h-index</span>
-              </div>
-              <div class="stat-box">
-                <strong>{{ profile.scholarStats.i10Index }}</strong>
-                <span>i10-index</span>
-              </div>
-              <div class="stat-box">
-                <strong>{{ profile.scholarStats.updatedAt }}</strong>
-                <span>Snapshot</span>
-              </div>
-            </div>
-          </section>
-
           <section class="academic-card side-section scroll">
             <h2 class="side-title">Recent News</h2>
             <NewsList :items="newsItems" />
