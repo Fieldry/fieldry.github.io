@@ -1,3 +1,10 @@
 node_modules/
 dist/
 .DS_Store
+tmp/
+build/cv/*.aux
+build/cv/*.fdb_latexmk
+build/cv/*.fls
+build/cv/*.log
+build/cv/*.out
+build/cv/*.xdv
