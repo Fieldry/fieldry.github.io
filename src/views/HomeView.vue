@@ -137,6 +137,9 @@ function showAllPublications() {
                   </p>
                   <p>{{ profile.school }}</p>
                   <p>{{ profile.affiliation }}</p>
+                  <p>
+                    <strong>AI for Healthcare · Medical LLMs · EHR Modeling</strong>
+                  </p>
                 </div>
               </div>
               <img
@@ -145,9 +148,6 @@ function showAllPublications() {
                 :alt="`${profile.name} profile photo`"
               >
             </div>
-            <p class="profile-focus">
-              AI for Healthcare · Medical LLMs · EHR Modeling
-            </p>
             <div class="action-grid">
               <a
                 class="action-link"
