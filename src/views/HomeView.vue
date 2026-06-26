@@ -141,7 +141,11 @@ function showAllPublications() {
                   <p>{{ profile.affiliation }}</p>
                 </div>
               </div>
-              <div class="avatar" aria-hidden="true">ZW</div>
+              <img
+                class="avatar"
+                src="/assets/profile_photo_avatar.jpg"
+                :alt="`${profile.name} profile photo`"
+              >
             </div>
             <div class="action-grid">
               <a
