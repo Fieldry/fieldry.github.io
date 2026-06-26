@@ -143,12 +143,6 @@ p {
   white-space: nowrap;
 }
 
-.brand-cn {
-  color: var(--muted);
-  font-size: 1rem;
-  white-space: nowrap;
-}
-
 .nav {
   display: flex;
   align-items: center;
@@ -269,13 +263,6 @@ main {
   font-size: 1.25rem;
   font-weight: 800;
   line-height: 1.15;
-}
-
-.profile-name span {
-  display: block;
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-top: 5px;
 }
 
 .profile-email,
@@ -768,10 +755,6 @@ main {
 
   .brand-name {
     font-size: 1rem;
-  }
-
-  .brand-cn {
-    display: none;
   }
 
   .main-grid {

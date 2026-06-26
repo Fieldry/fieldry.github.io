@@ -79,7 +79,6 @@ function showAllPublications() {
         >
           <span class="brand-bar" aria-hidden="true" />
           <span class="brand-name">{{ profile.name }}</span>
-          <span class="brand-cn">{{ profile.cnName }}</span>
         </button>
         <nav class="nav" aria-label="Primary navigation">
           <button
@@ -128,7 +127,6 @@ function showAllPublications() {
               <div>
                 <h1 class="profile-name">
                   {{ profile.name }}
-                  <span>{{ profile.cnName }}</span>
                 </h1>
                 <a class="profile-email" :href="`mailto:${profile.email}`">
                   {{ profile.email }}

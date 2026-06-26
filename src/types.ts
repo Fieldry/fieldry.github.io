@@ -23,7 +23,6 @@ export interface Interest {
 
 export interface Profile {
   name: string;
-  cnName: string;
   title: string;
   affiliation: string;
   school: string;

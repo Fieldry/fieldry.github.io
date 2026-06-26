@@ -141,7 +141,6 @@ const cv = String.raw`\documentclass[10pt,a4paper]{article}
 
 \begin{center}
 {\huge\textbf{${tex(siteData.profile.name)}}}\\
-{\large ${tex(siteData.profile.cnName)}}\\
 \vspace{1.2mm}
 \textbf{E-mail:} \href{mailto:${href(siteData.profile.email)}}{${tex(siteData.profile.email)}}\hspace{5mm}
 \textbf{Homepage:} \href{${href(HOMEPAGE_URL)}}{${tex(HOMEPAGE_URL)}}\hspace{5mm}

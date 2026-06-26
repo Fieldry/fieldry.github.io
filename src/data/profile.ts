@@ -2,7 +2,6 @@ import type { Profile } from "../types";
 
 export const profile: Profile = {
   name: "Zixiang Wang",
-  cnName: "王子翔",
   title: "Master's Student",
   affiliation: "Peking University",
   school: "School of Software and Microelectronics",
