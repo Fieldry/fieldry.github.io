@@ -1,6 +1,13 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import type { AwardItem, LinkItem, Project, Publication, TimelineItem } from "../src/types";
+import type {
+  AwardItem,
+  LinkItem,
+  Project,
+  Publication,
+  ServiceItem,
+  TimelineItem,
+} from "../src/types";
 import {
   publicationTagOrder,
   sortPublications,
@@ -283,7 +290,7 @@ function formatAward(item: AwardItem) {
   return `\\cvitem{${tex(item.title)}}{${organization}}{${tex(item.year)}}`;
 }
 
-function formatService(item: AwardItem) {
+function formatService(item: ServiceItem) {
   const organization = item.organization
     ? `, \\cvdetail{${tex(item.organization)}}`
     : "";
