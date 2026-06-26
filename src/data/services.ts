@@ -21,6 +21,10 @@ const teachingAssistantCourses: CourseService[] = [
 // { uid: "iclr-2027", name: "ICLR 2027", year: "2026" },
 const reviewerConferences: ConferenceService[] = [
   { uid: "aaai-2026", name: "AAAI 2026", year: "2025" },
+  { uid: "aaai-2027", name: "AAAI 2027", year: "2026" },
+  { uid: "npjdm-2026", name: "npj Digital Medicine", year: "2026" },
+  { uid: "npjhs-2026", name: "npj Health Systems", year: "2026" },
+  { uid: "scientific-reports-2026", name: "Scientific Reports", year: "2026" },
 ];
 
 export const services: ServiceItem[] = [

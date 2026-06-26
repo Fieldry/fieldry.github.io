@@ -28,6 +28,7 @@ const outputPath = resolve(
 );
 
 const groupedPublications = groupPublications(siteData.publications);
+const cvServices = mergeCvServices(siteData.services);
 
 const cv = String.raw`\documentclass[10pt,a4paper]{article}
 
@@ -174,7 +175,7 @@ ${siteData.projects.map(formatProject).join("\n")}
 ${siteData.awards.map(formatAward).join("\n")}
 
 \sectiontitle{Services}
-${siteData.services.map(formatService).join("\n")}
+${cvServices.map(formatService).join("\n")}
 
 \end{document}
 `;
@@ -296,6 +297,63 @@ function formatService(item: ServiceItem) {
     : "";
 
   return `\\cvitem{${tex(item.title)}}{${organization}}{${tex(item.year)}}`;
+}
+
+function mergeCvServices(services: ServiceItem[]) {
+  const serviceGroups = new Map<string, ServiceItem[]>();
+
+  services
+    .filter((service) => service.title !== "Teaching Assistant")
+    .forEach((service) => {
+      const groupKey = [
+        service.title,
+        stripTrailingYear(service.organization).toLowerCase(),
+      ].join("::");
+      const group = serviceGroups.get(groupKey) ?? [];
+      group.push(service);
+      serviceGroups.set(groupKey, group);
+    });
+
+  return [...serviceGroups.values()].map((group) => ({
+    ...group[0],
+    organization: formatMergedOrganizations(group),
+    year: uniqueValues(group.map((service) => service.year)).join(", "),
+  }));
+}
+
+function formatMergedOrganizations(services: ServiceItem[]) {
+  const organizations = uniqueValues(
+    services.map((service) => service.organization),
+  );
+
+  if (organizations.length === 1) {
+    return organizations[0] ?? "";
+  }
+
+  const baseOrganization = stripTrailingYear(organizations[0]);
+  const years = organizations
+    .map((organization) => organization.match(/\b(\d{4})$/)?.[1] ?? "")
+    .filter(Boolean);
+
+  if (
+    baseOrganization &&
+    years.length === organizations.length &&
+    organizations.every(
+      (organization) => stripTrailingYear(organization) === baseOrganization,
+    )
+  ) {
+    return `${baseOrganization} ${years.join(", ")}`;
+  }
+
+  return organizations.join(", ");
+}
+
+function uniqueValues(values: string[]) {
+  return [...new Set(values.filter(Boolean))];
+}
+
+function stripTrailingYear(value = "") {
+  return value.replace(/\s+\d{4}$/, "").trim();
 }
 
 function formatAuthors(publication: Publication) {
