@@ -157,9 +157,6 @@ ${siteData.profile.interests.map(formatInterestItem).join("\n")}
 \sectiontitle{Education}
 ${siteData.education.map(formatTimelineItem).join("\n")}
 
-\sectiontitle{Research Experience}
-${siteData.experience.map(formatTimelineItem).join("\n")}
-
 \sectiontitle{Publications {\normalfont\small ($^{\ast}$ indicates equal contribution; $^{\dagger}$ indicates corresponding author)}}
 ${groupedPublications.map(formatPublicationGroup).join("\n")}
 
