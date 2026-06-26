@@ -177,7 +177,7 @@ function showAllPublications() {
         <section class="academic-card panel">
           <div v-show="activeTab === 'about'" class="panel-pane">
             <section class="hero">
-              <div>
+              <div class="hero-intro">
                 <span class="eyebrow">
                   AI for Healthcare · Medical LLMs · EHR Modeling
                 </span>
