@@ -25,9 +25,9 @@ export const profile: Profile = {
     },
   ],
   scholarStats: {
-    citations: "274",
-    hIndex: "7",
-    i10Index: "6",
-    updatedAt: "2026.04.22",
+    citations: "333",
+    hIndex: "9",
+    i10Index: "8",
+    updatedAt: "2026.06.26",
   },
 };
