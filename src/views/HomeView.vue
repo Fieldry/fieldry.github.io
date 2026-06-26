@@ -150,19 +150,11 @@ function showAllPublications() {
             <div class="action-grid">
               <a
                 class="action-link"
-                href="https://scholar.google.com/citations?user=U73PSFAAAAAJ"
+                href="/cv/ZixiangWang_CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Scholar
-              </a>
-              <a
-                class="action-link"
-                href="https://github.com/Fieldry"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
+                CV
               </a>
             </div>
           </section>

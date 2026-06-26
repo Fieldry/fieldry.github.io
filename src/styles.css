@@ -308,6 +308,10 @@ main {
   margin-top: 14px;
 }
 
+.action-grid {
+  grid-template-columns: 1fr;
+}
+
 .action-link,
 .quick-link,
 .pub-link,
