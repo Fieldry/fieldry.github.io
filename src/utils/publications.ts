@@ -22,9 +22,9 @@ export interface PublicationFilterOptions {
 }
 
 export function getFeaturedPublications(publications: Publication[]) {
-  return sortPublications(
-    publications.filter((publication) => publication.featured),
-  );
+  return publications
+    .filter((publication) => publication.featured)
+    .sort(compareFeaturedPublications);
 }
 
 export function sortPublications(publications: Publication[]) {
@@ -64,23 +64,23 @@ export function filterPublications(
         ? publications.filter((publication) => publication.tag === selectedTag)
         : featuredPublications;
 
-  return sortPublications(
-    base.filter((publication) => {
-      const searchable = [
-        publication.title,
-        publication.authors,
-        publication.venue,
-        publication.tag,
-      ]
-        .join(" ")
-        .toLowerCase();
+  const filtered = base.filter((publication) => {
+    const searchable = [
+      publication.title,
+      publication.authors,
+      publication.venue,
+      publication.tag,
+    ]
+      .join(" ")
+      .toLowerCase();
 
-      return (
-        (!query || searchable.includes(query)) &&
-        (!selectedYear || publication.year === selectedYear)
-      );
-    }),
-  );
+    return (
+      (!query || searchable.includes(query)) &&
+      (!selectedYear || publication.year === selectedYear)
+    );
+  });
+
+  return selectedTag === "" ? filtered : sortPublications(filtered);
 }
 
 export function formatAuthorsHtml({
@@ -144,6 +144,15 @@ function comparePublications(a: Publication, b: Publication) {
   if (a.year !== b.year) return b.year.localeCompare(a.year);
   if (Boolean(a.featured) !== Boolean(b.featured)) return a.featured ? -1 : 1;
   return a.title.localeCompare(b.title);
+}
+
+function compareFeaturedPublications(a: Publication, b: Publication) {
+  const orderA = a.featuredOrder ?? Number.MAX_SAFE_INTEGER;
+  const orderB = b.featuredOrder ?? Number.MAX_SAFE_INTEGER;
+
+  if (orderA !== orderB) return orderA - orderB;
+
+  return comparePublications(a, b);
 }
 
 function comparePublicationTags(

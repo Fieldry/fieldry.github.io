@@ -47,6 +47,7 @@ export interface NewsItem {
 export interface Publication {
   uid: string;
   featured?: boolean;
+  featuredOrder?: number;
   title: string;
   authors: string;
   firstAuthors?: string;

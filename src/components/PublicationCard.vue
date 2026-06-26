@@ -48,9 +48,6 @@ const authorsHtml = computed(() => {
       <span v-if="showTag && 'tag' in item" class="tag-chip">
         {{ item.tag }}
       </span>
-      <span v-if="'featured' in item && item.featured" class="tag-chip red">
-        Featured
-      </span>
     </div>
   </article>
 </template>
