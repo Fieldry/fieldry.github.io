@@ -42,7 +42,7 @@ const featuredPublications = computed(() =>
   getFeaturedPublications(publications),
 );
 
-const featuredPreview = computed(() => featuredPublications.value.slice(0, 5));
+const featuredPreview = computed(() => featuredPublications.value.slice(0, 6));
 const publicationTags = computed(() => getPublicationTags(publications));
 const availableYears = computed(() => getPublicationYears(publications));
 
