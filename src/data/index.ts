@@ -1,0 +1,10 @@
+export { authorLinks } from "./authors";
+export { awards } from "./awards";
+export { education } from "./education";
+export { experience } from "./experience";
+export { quickLinks } from "./links";
+export { newsItems } from "./news";
+export { profile } from "./profile";
+export { projects } from "./projects";
+export { publications } from "./publications";
+export { services } from "./services";
