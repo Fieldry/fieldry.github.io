@@ -144,7 +144,7 @@ const cv = String.raw`\documentclass[10pt,a4paper]{article}
 \vspace{1.2mm}
 \textbf{E-mail:} \href{mailto:${href(siteData.profile.email)}}{${tex(siteData.profile.email)}}\hspace{5mm}
 \textbf{Homepage:} \href{${href(HOMEPAGE_URL)}}{${tex(HOMEPAGE_URL)}}\hspace{5mm}
-\textbf{Google Scholar:} \href{${href(SCHOLAR_URL)}}{Profile}
+\textbf{Google Scholar:} \href{${href(SCHOLAR_URL)}}{${tex(siteData.profile.scholarStats.citations)} citations}
 \end{center}
 \vspace{-0.4mm}
 
