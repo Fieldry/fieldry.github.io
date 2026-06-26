@@ -27,7 +27,6 @@ const {
   experience,
   newsItems,
   profile,
-  projects,
   publications,
   quickLinks,
   services,
@@ -204,7 +203,6 @@ function showAllPublications() {
                 <span class="eyebrow">
                   AI for Healthcare · Medical LLMs · EHR Modeling
                 </span>
-                <h2>Reliable AI systems for healthcare research.</h2>
                 <p class="bio" v-html="profile.bio" />
               </div>
               <div class="focus-grid">
@@ -219,7 +217,7 @@ function showAllPublications() {
               </div>
             </section>
 
-            <div class="content-grid">
+            <div class="content-grid about-grid">
               <section class="academic-card section">
                 <div class="section-title-row">
                   <div>
@@ -239,25 +237,6 @@ function showAllPublications() {
                     :item="publication"
                     :author-links="authorLinks"
                     show-tag
-                  />
-                </div>
-              </section>
-
-              <section class="academic-card section">
-                <div class="section-title-row">
-                  <div>
-                    <h2>Selected Project</h2>
-                    <p class="section-subtitle">
-                      Work related to clinical decision support platforms.
-                    </p>
-                  </div>
-                </div>
-                <div class="card-list">
-                  <PublicationCard
-                    v-for="project in projects"
-                    :key="project.uid"
-                    :item="project"
-                    :author-links="authorLinks"
                   />
                 </div>
               </section>

@@ -185,15 +185,15 @@ p {
 
 main {
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .main-grid {
-  height: calc(100vh - 100px);
-  min-height: 680px;
+  min-height: calc(100vh - 100px);
   display: grid;
   grid-template-columns: minmax(270px, 1fr) minmax(0, 3fr);
   gap: 16px;
+  align-items: start;
   padding: 16px 0;
 }
 
@@ -205,11 +205,9 @@ main {
 }
 
 .sidebar {
-  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow: hidden;
 }
 
 .profile-card,
@@ -218,11 +216,8 @@ main {
 }
 
 .side-section.scroll {
-  min-height: 0;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 .profile-head {
@@ -345,18 +340,10 @@ main {
 }
 
 .news-list {
-  min-height: 0;
-  overflow-y: auto;
   display: grid;
   gap: 10px;
   margin-top: 10px;
   padding-right: 2px;
-  scrollbar-width: none;
-}
-
-.news-list::-webkit-scrollbar,
-.panel-pane::-webkit-scrollbar {
-  display: none;
 }
 
 .news-item {
@@ -393,22 +380,16 @@ main {
 
 .panel {
   min-width: 0;
-  min-height: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .panel-pane {
-  min-height: 100%;
-  overflow-y: auto;
+  min-height: 0;
+  overflow: visible;
   padding: 24px;
-  scrollbar-width: none;
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
-  gap: 24px;
-  align-items: start;
   margin-bottom: 24px;
 }
 
@@ -456,6 +437,11 @@ main {
   gap: 10px;
 }
 
+.focus-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 24px;
+}
+
 .focus-card {
   border-left: 2px solid var(--primary);
   padding: 12px 14px;
@@ -479,6 +465,10 @@ main {
   grid-template-columns: minmax(0, 1fr) minmax(300px, 0.62fr);
   gap: 16px;
   align-items: start;
+}
+
+.about-grid {
+  grid-template-columns: 1fr;
 }
 
 .section {
@@ -719,6 +709,10 @@ main {
   .content-grid {
     grid-template-columns: 1fr;
   }
+
+  .focus-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
 }
 
 @media (max-width: 780px) {
@@ -755,6 +749,10 @@ main {
 
   .hero h2 {
     font-size: 2rem;
+  }
+
+  .focus-grid {
+    grid-template-columns: 1fr;
   }
 
   .publication-toolbar,
