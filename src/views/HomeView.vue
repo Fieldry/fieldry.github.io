@@ -145,6 +145,9 @@ function showAllPublications() {
                 :alt="`${profile.name} profile photo`"
               >
             </div>
+            <p class="profile-focus">
+              AI for Healthcare · Medical LLMs · EHR Modeling
+            </p>
             <div class="action-grid">
               <a
                 class="action-link"
@@ -171,12 +174,7 @@ function showAllPublications() {
         <section class="academic-card panel">
           <div v-show="activeTab === 'about'" class="panel-pane">
             <section class="hero">
-              <div class="hero-intro">
-                <span class="eyebrow">
-                  AI for Healthcare · Medical LLMs · EHR Modeling
-                </span>
-                <p class="bio" v-html="profile.bio" />
-              </div>
+              <p class="bio" v-html="profile.bio" />
               <div class="focus-grid">
                 <article
                   v-for="interest in profile.interests"

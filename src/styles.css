@@ -286,6 +286,16 @@ main {
   color: var(--text);
 }
 
+.profile-focus {
+  margin-top: 14px;
+  color: var(--primary-dark);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: left;
+}
+
 .action-grid,
 .quick-links,
 .stat-grid {
@@ -411,26 +421,6 @@ main {
 
 .hero {
   margin-bottom: 16px;
-}
-
-.hero-intro {
-  display: grid;
-  grid-template-columns: minmax(300px, 0.48fr) minmax(0, 1fr);
-  gap: 18px;
-  align-items: start;
-}
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  border-radius: 999px;
-  background: rgba(0, 91, 172, 0.07);
-  color: var(--primary-dark);
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 5px 9px;
 }
 
 .hero h2 {
@@ -731,7 +721,6 @@ main {
   }
 
   .hero,
-  .hero-intro,
   .content-grid {
     grid-template-columns: 1fr;
   }
