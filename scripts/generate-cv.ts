@@ -166,7 +166,7 @@ ${siteData.profile.interests.map(formatInterestItem).join("\n")}
 ${siteData.education.map(formatTimelineItem).join("\n")}
 
 \sectiontitle{Publications {\normalfont\small ($^{\ast}$ indicates equal contribution; $^{\dagger}$ indicates corresponding author)}}
-${groupedPublications.map(formatPublicationGroup).join("\n")}
+${groupedPublications.map(g => (g.title === "LLM for Healthcare" ? "\\pagebreak\n" : "") + formatPublicationGroup(g)).join("\n")}
 
 \sectiontitle{Selected Project}
 ${siteData.projects.map(formatProject).join("\n")}
