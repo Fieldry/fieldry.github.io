@@ -3,11 +3,11 @@ import { escapeHtml } from "./html";
 
 export const publicationTagOrder = [
   "LLM Agents for Healthcare",
+  "Toolkits & Platforms",
   "LLM for Healthcare",
   "Healthcare Benchmark",
   "Healthcare Modeling",
   "Trustworthy AI",
-  "Toolkits & Platforms",
 ];
 
 export interface PublicationTagSummary {
