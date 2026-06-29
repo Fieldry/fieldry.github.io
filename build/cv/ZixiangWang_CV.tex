@@ -78,6 +78,13 @@
     \vspace{1mm}
 }
 
+\newcommand{\educationentry}[4]{
+    \entryhead{#1}{#2}
+    {\small #3\par}
+    #4
+    \vspace{1mm}
+}
+
 \newcommand{\pubentry}[5]{
     \noindent
     \begin{minipage}[t]{0.145\textwidth}
@@ -133,8 +140,9 @@
 \end{enumerate}
 
 \sectiontitle{Education}
-\compactentry{\textbf{Peking University 北京大学}}{2024.09 - Present}{School of Software and Microelectronics · M.Eng. in Software Engineering (Working on AI for Healthcare, medical large language models, and EHR modeling under the supervision of Prof. Liantao Ma.)}
-\compactentry{\textbf{Beihang University 北京航空航天大学}}{2019.09 - 2024.06}{School of Software · B.Eng. in Software Engineering (GPA: 3.83; Rank: 9/187; Top 5\%. Completed systematic training in software engineering and gradually shifted toward data modeling, machine learning, and healthcare AI research.)}
+\educationentry{\textbf{Peking University 北京大学}}{2024.09 - Present}{School of Software and Microelectronics · M.Eng. in Software Engineering}{    {\small Working on AI for Healthcare, medical large language models, and EHR modeling under the supervision of Prof. Liantao Ma.\par}}
+\educationentry{\textbf{Beihang University 北京航空航天大学}}{2019.09 - 2024.06}{School of Software · B.Eng. in Software Engineering}{    {\small GPA: 3.83 (Rank: 9/187, Top 5\%).\par}
+    {\small Completed systematic training in software engineering and gradually shifted toward data modeling, machine learning, and healthcare AI research.\par}}
 
 \sectiontitle{Publications {\normalfont\small ($^{\ast}$ indicates equal contribution; $^{\dagger}$ indicates corresponding author)}}
 \pubcategorytitle{LLM Agents for Healthcare}

@@ -72,7 +72,7 @@ export interface TimelineItem {
   subtitle: string;
   period: string;
   details: string;
-  cvDetails?: string;
+  cvDetails?: string | string[];
 }
 
 export interface AwardItem {

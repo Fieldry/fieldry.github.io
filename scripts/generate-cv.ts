@@ -110,6 +110,13 @@ const cv = String.raw`\documentclass[10pt,a4paper]{article}
     \vspace{1mm}
 }
 
+\newcommand{\educationentry}[4]{
+    \entryhead{#1}{#2}
+    {\small #3\par}
+    #4
+    \vspace{1mm}
+}
+
 \newcommand{\pubentry}[5]{
     \noindent
     \begin{minipage}[t]{0.145\textwidth}
@@ -163,7 +170,7 @@ ${siteData.profile.interests.map(formatInterestItem).join("\n")}
 \end{enumerate}
 
 \sectiontitle{Education}
-${siteData.education.map(formatTimelineItem).join("\n")}
+${siteData.education.map(formatEducationItem).join("\n")}
 
 \sectiontitle{Publications {\normalfont\small ($^{\ast}$ indicates equal contribution; $^{\dagger}$ indicates corresponding author)}}
 ${groupedPublications.map(g => (g.title === "LLM for Healthcare" ? "\\pagebreak\n" : "") + formatPublicationGroup(g)).join("\n")}
@@ -228,25 +235,20 @@ function formatInterestItem(interest: {
   return `\\item {\\small\\textbf{${tex(interest.title)}}${suffix}}`;
 }
 
-function formatTimelineItem(item: TimelineItem) {
-  const detail = compactDetail([item.subtitle], item.cvDetails ?? item.details);
-
-  return `\\compactentry{\\textbf{${tex(item.title)}}}{${tex(item.period)}}{${detail}}`;
+function formatEducationItem(item: TimelineItem) {
+  return `\\educationentry{\\textbf{${tex(item.title)}}}{${tex(item.period)}}{${tex(item.subtitle)}}{${formatEducationDetails(item)}}`;
 }
 
-function compactDetail(parts: Array<string | undefined>, parenthetical = "") {
-  const base = parts.filter(Boolean).map(tex).join(", ");
-  const note = htmlToText(parenthetical);
+function formatEducationDetails(item: TimelineItem) {
+  const details = Array.isArray(item.cvDetails)
+    ? item.cvDetails
+    : [item.cvDetails ?? item.details];
 
-  if (!base && !note) {
-    return "";
-  }
-
-  if (!note) {
-    return base;
-  }
-
-  return base ? `${base} (${tex(note)})` : `(${tex(note)})`;
+  return details
+    .map(htmlToText)
+    .filter(Boolean)
+    .map((detail) => `    {\\small ${tex(detail)}\\par}`)
+    .join("\n");
 }
 
 function formatPublicationGroup(group: {
