@@ -14,5 +14,6 @@ export const education: TimelineItem[] = [
     subtitle: "School of Software · B.Eng. in Software Engineering",
     period: "2019.09 - 2024.06",
     details: "Completed systematic training in software engineering and gradually shifted toward data modeling, machine learning, and healthcare AI research.",
+    cvDetails: "GPA: 3.83; Rank: 9/187; Top 5%. Completed systematic training in software engineering and gradually shifted toward data modeling, machine learning, and healthcare AI research.",
   },
 ];

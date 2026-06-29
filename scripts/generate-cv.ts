@@ -229,7 +229,7 @@ function formatInterestItem(interest: {
 }
 
 function formatTimelineItem(item: TimelineItem) {
-  const detail = compactDetail([item.subtitle], item.details);
+  const detail = compactDetail([item.subtitle], item.cvDetails ?? item.details);
 
   return `\\compactentry{\\textbf{${tex(item.title)}}}{${tex(item.period)}}{${detail}}`;
 }
