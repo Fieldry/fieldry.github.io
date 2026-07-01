@@ -19,7 +19,7 @@ defineProps<{
         <span class="time-tag">{{ item.period }}</span>
         <h3>{{ item.title }}</h3>
         <p class="timeline-subtitle">{{ item.subtitle }}</p>
-        <p>{{ item.details }}</p>
+        <p v-html="item.details" />
       </article>
     </div>
   </section>

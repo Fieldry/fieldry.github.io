@@ -6,7 +6,7 @@ export const profile: Profile = {
   affiliation: "Peking University",
   school: "School of Software and Microelectronics",
   email: "wangzx@stu.pku.edu.cn",
-  bio: 'I am a master\'s student at <strong>Peking University</strong>, advised by <a href="http://scholar.pku.edu.cn/malt" target="_blank" rel="noopener noreferrer">Prof. Liantao Ma</a>. My research focuses on <strong>AI for Healthcare</strong>, especially medical large language models, electronic health record modeling, multi-agent collaboration, and reusable benchmark/toolkit infrastructure for clinical data analysis.',
+  bio: 'I am a master\'s student at <strong>Peking University</strong>, advised by <a href="http://scholar.pku.edu.cn/malt" target="_blank" rel="noopener noreferrer">Prof. Liantao Ma</a> and <a href="https://faculty.pku.edu.cn/wangyasha/en/index.htm" target="_blank" rel="noopener noreferrer">Prof. Yasha Wang</a>. My research focuses on <strong>AI for Healthcare</strong>, especially medical large language models, electronic health record modeling, multi-agent collaboration, and reusable benchmark/toolkit infrastructure for clinical data analysis.',
   interests: [
     {
       uid: "medical-llm",
