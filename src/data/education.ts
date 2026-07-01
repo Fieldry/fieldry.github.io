@@ -6,7 +6,7 @@ export const education: TimelineItem[] = [
     title: "Peking University 北京大学",
     subtitle: "School of Software and Microelectronics · M.Eng. in Software Engineering",
     period: "2024.09 - Present",
-    details: 'Working on AI for Healthcare, medical large language models, and EHR modeling under the supervision of <a href="http://scholar.pku.edu.cn/malt" target="_blank" rel="noopener noreferrer">Prof. Liantao Ma</a> and <a href="https://faculty.pku.edu.cn/wangyasha/en/index.htm" target="_blank" rel="noopener noreferrer">Prof. Yasha Wang</a>.',
+    details: 'Working on AI for Healthcare, medical large language models, and EHR modeling advised by <a href="http://scholar.pku.edu.cn/malt" target="_blank" rel="noopener noreferrer">Prof. Liantao Ma</a> and <a href="https://faculty.pku.edu.cn/wangyasha/en/index.htm" target="_blank" rel="noopener noreferrer">Prof. Yasha Wang</a>.',
   },
   {
     uid: "education-buaa",
