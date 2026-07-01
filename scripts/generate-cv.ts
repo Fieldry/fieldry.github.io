@@ -433,9 +433,14 @@ function htmlToText(value = "") {
   return decodeHtmlEntities(
     value
       .replace(/<br\s*\/?>/gi, " ")
-      .replace(/<a\b[^>]*>(.*?)<\/a>/gi, "$1")
-      .replace(/<[^>]*>/g, " "),
+      .replace(/<\/?(?:p|div|li|ul|ol)\b[^>]*>/gi, " ")
+      .replace(/<a\b[^>]*>([\s\S]*?)<\/a>/gi, "$1")
+      .replace(/<\/?(?:strong|b|em|i|span)\b[^>]*>/gi, "")
+      .replace(/<[^>]*>/g, ""),
   )
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/([([{])\s+/g, "$1")
+    .replace(/\s+([)\]}])/g, "$1")
     .replace(/\s+/g, " ")
     .trim();
 }
