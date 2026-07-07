@@ -29,11 +29,12 @@ const cvServices = mergeCvServices(siteData.services);
 
 const profileCn = {
   name: "王子翔",
-  bio: "我是北京大学软件与微电子学院硕士研究生，导师为马连韬教授和王亚沙教授。我的研究方向为医疗健康人工智能，重点关注医疗大语言模型及多智能体协作应用、时序电子病历数据建模，以及面向临床数据分析的可复用基准与工具基础设施。",
+  bioTex:
+    "我是北京大学软件与微电子学院硕士研究生，导师为马连韬教授和王亚沙教授。我的研究方向重点关注\\textbf{医疗大语言模型及多智能体协作应用}、\\textbf{时序电子病历数据建模}，以及\\textbf{面向临床数据分析的可复用基准与工具基础设施}。",
   interests: [
     {
-      title: "医疗大语言模型",
-      description: "构建并评估面向临床预测、推理、检索和决策支持的大语言模型驱动的多智能体系统。",
+      title: "医疗大语言模型及智能体应用",
+      description: "构建并评估面向临床预测、推理、检索和决策支持的高可靠可信的多智能体系统。",
     },
     {
       title: "时序电子病历数据建模",
@@ -179,10 +180,9 @@ const cv = String.raw`\documentclass[10pt,a4paper]{article}
     \par
 }
 
-\newcommand{\educationentry}[4]{
+\newcommand{\educationentry}[3]{
     \entryhead{#1}{#2}
     {\small #3\par}
-    #4
     \vspace{1mm}
 }
 
@@ -215,6 +215,8 @@ const cv = String.raw`\documentclass[10pt,a4paper]{article}
     \par\vspace{0.82mm}
 }
 
+\newcommand{\secondpageleading}{\linespread{1.075}\selectfont}
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \setlist[itemize]{leftmargin=1.1em,topsep=0.3mm,itemsep=0.35mm,parsep=0pt}
@@ -233,7 +235,7 @@ const cv = String.raw`\documentclass[10pt,a4paper]{article}
 \vspace{-0.4mm}
 
 \sectiontitle{研究方向}
-{\small ${tex(profileCn.bio)}\par}
+{\small ${profileCn.bioTex}\par}
 \begin{enumerate}[label=(\arabic*)]
 ${profileCn.interests.map(formatInterestItem).join("\n")}
 \end{enumerate}
@@ -273,13 +275,13 @@ function formatInterestItem(interest: { title: string; description: string }) {
 
 function formatEducation() {
   return [
-    "\\educationentry{\\textbf{北京大学}}{2024.09 - 至今}{软件与微电子学院 · 软件工程硕士}{    {\\small 关注医疗健康 AI、医疗大语言模型与时序电子病历数据建模研究，导师为马连韬教授和王亚沙教授。\\par}}",
-    "\\educationentry{\\textbf{北京航空航天大学}}{2019.09 - 2024.06}{软件学院 · 软件工程学士}{    {\\small GPA：3.83（排名：9/187，前 5\\%）。\\par}}",
+    "\\educationentry{\\textbf{北京大学}}{2024.09 - 至今}{软件与微电子学院 · 软件工程硕士 · 导师为马连韬教授和王亚沙教授\\par}",
+    "\\educationentry{\\textbf{北京航空航天大学}}{2019.09 - 2024.06}{软件学院 · 软件工程学士 · GPA: 3.83（排名: 9/187，前 5\\%）\\par}",
   ].join("\n");
 }
 
 function formatPublicationSection(section: (typeof publicationSections)[number]) {
-  const prefix = section.pageBreakBefore ? "\\pagebreak\n" : "";
+  const prefix = section.pageBreakBefore ? "\\pagebreak\n\\secondpageleading\n" : "";
   const entries = section.publications
     .map((item) =>
       formatPublication(item.uid, {
@@ -313,7 +315,7 @@ function formatPublication(
     : tex(titleText);
   const authors =
     options.authorMode === "coauthors"
-      ? "Co-authors"
+      ? "Co-author"
       : formatAuthors({
           authors: options.authors ?? publication.authors,
           firstAuthors: options.firstAuthors ?? publication.firstAuthors,
