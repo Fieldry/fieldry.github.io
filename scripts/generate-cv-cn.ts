@@ -49,7 +49,7 @@ const profileCn = {
 
 const publicationSections = [
   {
-    title: "Core Work",
+    title: "Core Works",
     authorMode: "full",
     publications: [
       {
@@ -215,12 +215,11 @@ const cv = String.raw`\documentclass[10pt,a4paper]{article}
     \par\vspace{0.82mm}
 }
 
-\newcommand{\secondpageleading}{\linespread{1.075}\selectfont}
-
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \setlist[itemize]{leftmargin=1.1em,topsep=0.3mm,itemsep=0.35mm,parsep=0pt}
 \setlist[enumerate]{leftmargin=1.6em,topsep=0.5mm,itemsep=0.35mm,parsep=0pt}
+\linespread{1.075}\selectfont
 \sloppy
 
 \begin{document}
@@ -281,7 +280,7 @@ function formatEducation() {
 }
 
 function formatPublicationSection(section: (typeof publicationSections)[number]) {
-  const prefix = section.pageBreakBefore ? "\\pagebreak\n\\secondpageleading\n" : "";
+  const prefix = section.pageBreakBefore ? "\\pagebreak\n" : "";
   const entries = section.publications
     .map((item) =>
       formatPublication(item.uid, {
