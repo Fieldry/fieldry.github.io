@@ -1,0 +1,234 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[left=0.48in,right=0.48in,top=0.45in,bottom=0.48in]{geometry}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \IfFileExists{ctex.sty}{\usepackage[UTF8]{ctex}}{}
+  \IfFileExists{cmbright.sty}{\usepackage{cmbright}}{\usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}}
+\else
+  \usepackage{fontspec}
+  \IfFileExists{xeCJK.sty}{\usepackage{xeCJK}}{}
+  \IfFontExistsTF{Arial}{\setmainfont{Arial}}{\setmainfont{Helvetica Neue}}
+  \IfFontExistsTF{PingFang SC}{\setCJKmainfont{PingFang SC}}{}
+\fi
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{xcolor}
+\pagenumbering{gobble}
+
+\definecolor{darkred}{RGB}{153,0,0}
+\definecolor{textgray}{RGB}{55,65,81}
+\definecolor{mutedgray}{RGB}{100,116,139}
+\newlength{\pubcategorywidth}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkred,
+    urlcolor=darkred,
+    pdftitle={王子翔的简历},
+    pdfauthor={王子翔},
+    pageanchor=false
+}
+\urlstyle{same}
+
+\newcommand{\sectiontitle}[1]{%
+    \par\vspace{2.6mm}%
+    \noindent{\Large\textbf{#1}}\par
+    \vspace{0.9mm}%
+    \hrule width \textwidth height 0.36pt
+    \vspace{1.85mm}%
+}
+
+\newcommand{\pubcategorytitle}[1]{%
+    \par\vspace{1.2mm}%
+    \settowidth{\pubcategorywidth}{{\normalsize\textbf{#1}}}%
+    \noindent{\normalsize\textcolor{darkred}{\textbf{#1}}}\par
+    \vspace{0.45mm}%
+    {\color{darkred}\hrule width \pubcategorywidth height 0.32pt}
+    \vspace{1.45mm}%
+}
+
+\newcommand{\entryhead}[2]{
+    \noindent
+    \begin{minipage}[t]{0.82\textwidth}
+    \raggedright #1
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.16\textwidth}
+    \raggedleft\footnotesize\textcolor{mutedgray}{#2}
+    \end{minipage}
+    \par
+}
+
+\newcommand{\educationentry}[4]{
+    \entryhead{#1}{#2}
+    {\small #3\par}
+    #4
+    \vspace{1mm}
+}
+
+\newcommand{\pubentry}[5]{
+    \noindent
+    \begin{minipage}[t]{0.145\textwidth}
+    \raggedright\small\textbf{#1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.84\textwidth}
+    {\small\textbf{\textcolor{black}{#2}}}\\[-0.1mm]
+    {\small #3}\\[-0.1mm]
+    {\small\textit{#4}, #5}
+    \end{minipage}
+    \par\vspace{1.35mm}
+}
+
+\newcommand{\cvmarker}{
+    \makebox[0.018\textwidth][l]{\raisebox{0.36ex}{\textcolor{darkred}{\scriptsize$\triangleright$}}}%
+}
+
+\newcommand{\cvdetail}[1]{\textnormal{\textcolor{textgray}{#1}}}
+
+\newcommand{\cvitem}[3]{
+    \noindent
+    \cvmarker
+    \begin{minipage}[t]{0.855\textwidth}{\small\strut\textbf{#1}#2}\end{minipage}
+    \hfill
+    \makebox[0.105\textwidth][r]{\small\strut\textcolor{mutedgray}{#3}}
+    \par\vspace{0.82mm}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.1em,topsep=0.3mm,itemsep=0.35mm,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.6em,topsep=0.5mm,itemsep=0.35mm,parsep=0pt}
+\sloppy
+
+\begin{document}
+
+\begin{center}
+{\huge\textbf{王子翔}}\\
+\vspace{1.2mm}
+\textbf{邮箱：} \href{mailto:wangzx@stu.pku.edu.cn}{wangzx@stu.pku.edu.cn}\hspace{5mm}
+\textbf{主页：} \href{https://fieldry.github.io/}{https://fieldry.github.io/}\hspace{5mm}
+\textbf{Google Scholar：} \href{https://scholar.google.com/citations?user=U73PSFAAAAAJ}{333 次引用}
+\end{center}
+\vspace{-0.4mm}
+
+\sectiontitle{研究方向}
+{\small 我是北京大学软件与微电子学院硕士研究生，导师为马连韬教授和王亚沙教授。我的研究方向为医疗健康人工智能，重点关注医疗大语言模型及多智能体协作应用、时序电子病历数据建模，以及面向临床数据分析的可复用基准与工具基础设施。\par}
+\begin{enumerate}[label=(\arabic*)]
+\item {\small\textbf{医疗大语言模型}：构建并评估面向临床预测、推理、检索和决策支持的大语言模型驱动的多智能体系统。}
+\item {\small\textbf{时序电子病历数据建模}：面向纵向、稀疏和多模态 EHR 数据进行建模，关注临床可靠性与复用。}
+\item {\small\textbf{基准、工具包与协议}：构建开放资源，提高医疗健康 AI 评估的可复现性与实际可用性。}
+\end{enumerate}
+
+\sectiontitle{教育经历}
+\educationentry{\textbf{北京大学}}{2024.09 - 至今}{软件与微电子学院 · 软件工程硕士}{    {\small 关注医疗健康 AI、医疗大语言模型与时序电子病历数据建模研究，导师为马连韬教授和王亚沙教授。\par}}
+\educationentry{\textbf{北京航空航天大学}}{2019.09 - 2024.06}{软件学院 · 软件工程学士}{    {\small GPA：3.83（排名：9/187，前 5\%）。\par}}
+
+\sectiontitle{论文发表 {\normalfont\small ($^{\ast}$ 表示共同一作；$^{\dagger}$ 表示通讯作者)}}
+\pubcategorytitle{Core Work}
+\pubentry{[WWW 2025\\[-0.1mm]- CCF A]}
+{\begingroup\hypersetup{hidelinks}\href{https://dl.acm.org/doi/10.1145/3696410.3714877}{ColaCare: Enhancing Electronic Health Record Modeling through Large Language Model-Driven Multi-Agent Collaboration}\endgroup}
+{\textbf{Zixiang Wang}$^{\ast}$, Yinghao Zhu$^{\ast}$, Huiya Zhao$^{\ast}$, Xiaochen Zheng, Tianlong Wang, Wen Tang, Yasha Wang$^{\dagger}$, Chengwei Pan, Ewen Harrison, Junyi Gao$^{\dagger}$, Liantao Ma$^{\dagger}$}
+{ACM International World Wide Web Conference (WWW)}
+{2025}
+\pubentry{[CHI 2026\\[-0.1mm]- CCF A]}
+{\begingroup\hypersetup{hidelinks}\href{https://arxiv.org/abs/2602.00726}{Augmenting Clinical Decision-Making with an Interactive and Interpretable AI Copilot: A Real-World User Study with Clinicians in Nephrology and Obstetrics}\endgroup}
+{Yinghao Zhu$^{\ast}$, Dehao Sui$^{\ast}$, \textbf{Zixiang Wang}$^{\ast}$, Xuning Hu, Lei Gu, Yifan Qi, Tianchen Wu, Ling Wang, Yuan Wei, Wen Tang, Zhihan Cui, Yasha Wang, Lequan Yu, Ewen Harrison, Junyi Gao, Liantao Ma$^{\dagger}$}
+{ACM CHI Conference on Human Factors in Computing Systems (CHI)}
+{2026}
+\pubentry{[KDD 2024\\[-0.1mm]- CCF A]}
+{\begingroup\hypersetup{hidelinks}\href{https://openreview.net/pdf?id=jqo1vk63qE}{RetCare: Towards Interpretable Clinical Decision Making through LLM-Driven Medical Knowledge Retrieval}\endgroup}
+{\textbf{Zixiang Wang}$^{\ast}$, Yinghao Zhu$^{\ast}$, Junyi Gao, Xiaochen Zheng, Yuhui Zeng, Yifan He, Bowen Jiang, Wen Tang, Ewen Harrison, Chengwei Pan, Liantao Ma$^{\dagger}$, Ling Wang$^{\dagger}$}
+{Artificial Intelligence and Data Science for Healthcare: Bridging Data-Centric AI and People-Centric Healthcare (KDD 2024 AIDSH Workshop)}
+{2024}
+\pubentry{[npj Digital Medicine 2026]}
+{\begingroup\hypersetup{hidelinks}\href{https://www.nature.com/articles/s41746-026-02539-z}{ClinicRealm: Re-evaluating Large Language Models with Conventional Machine Learning for Non-Generative Clinical Prediction Tasks}\endgroup}
+{Yinghao Zhu$^{\ast}$, Junyi Gao$^{\ast}$, \textbf{Zixiang Wang}$^{\ast}$, Weibin Liao$^{\ast}$, Xiaochen Zheng, Lifang Liang, Miguel O. Bernabeu, Yasha Wang, Lequan Yu, Chengwei Pan$^{\dagger}$, Ewen Harrison$^{\dagger}$, Liantao Ma$^{\dagger}$}
+{npj Digital Medicine}
+{2026}
+\pubentry{[npj Digital Medicine 2026 - Minor Revision]}
+{\begingroup\hypersetup{hidelinks}\href{https://arxiv.org/abs/2508.02621}{HealthFlow: Automating electronic health record
+analysis via a strategically self-evolving multi-agent framework}\endgroup}
+{Yinghao Zhu$^{\ast}$, \textbf{Zixiang Wang}$^{\ast}$, Yifan Qi$^{\ast}$, Lei Gu, Dehao Sui, Haoran Hu, Xichen Zhang, Ziyi He, Junjun He, Liantao Ma$^{\dagger}$, Lequan Yu$^{\dagger}$}
+{Preprint}
+{2025}
+\pubentry{[STAR Protocols 2025]}
+{\begingroup\hypersetup{hidelinks}\href{https://star-protocols.cell.com/protocols/4069}{Protocol for Processing Multivariate Time-series Electronic Health Records of COVID-19 Patients}\endgroup}
+{\textbf{Zixiang Wang}$^{\ast}$, Yinghao Zhu$^{\ast}$, Dehao Sui, Tianlong Wang, Yuntao Zhang, Yasha Wang, Chengwei Pan, Junyi Gao$^{\dagger}$, Liantao Ma$^{\dagger}$, Ling Wang$^{\dagger}$, Xiaoyun Zhang$^{\dagger}$}
+{STAR Protocols}
+{2025}
+\pubcategorytitle{LLM Agents for Healthcare}
+\pubentry{[KDD 2024]}
+{\begingroup\hypersetup{hidelinks}\href{https://openreview.net/pdf?id=lvycHSrFgk}{EHRFlow: A Large Language Model-Driven Iterative Multi-Agent Electronic Health Record Data Analysis Workflow}\endgroup}
+{Co-authors}
+{Artificial Intelligence and Data Science for Healthcare: Bridging Data-Centric AI and People-Centric Healthcare (KDD 2024 AIDSH Workshop), Oral}
+{2024}
+\pubentry{[CIKM 2024]}
+{\begingroup\hypersetup{hidelinks}\href{https://dl.acm.org/doi/10.1145/3627673.3679582}{EMERGE: Enhancing Multimodal Electronic Health Records Predictive Modeling with Retrieval-Augmented Generation}\endgroup}
+{Co-authors}
+{ACM International Conference on Information and Knowledge Management (CIKM)}
+{2024}
+\pagebreak
+\pubcategorytitle{Toolkits \& Platforms \& Benchmarks}
+\pubentry{[KDD 2026]}
+{\begingroup\hypersetup{hidelinks}\href{https://medx-pku.github.io/OneEHR/}{OneEHR: Reproducible and AI Agent-Ready Longitudinal EHR Analysis Toolkit}\endgroup}
+{Co-authors}
+{ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD-26) Hands-On Tutorials}
+{2026}
+\pubentry{[SAIL 2025]}
+{\begingroup\hypersetup{hidelinks}\href{https://aboutme.vixerunt.org/assets/material/sail_aicare.pdf}{AICare: An AI-Clinician Interaction System for Transparent and Actionable Clinical Decision Support}\endgroup}
+{Co-authors}
+{The Symposium on Artificial Intelligence in Learning Health Systems (SAIL), Best abstract nominee}
+{2025}
+\pubentry{[NeurIPS 2025]}
+{\begingroup\hypersetup{hidelinks}\href{https://arxiv.org/abs/2505.12371}{MedAgentBoard: Benchmarking Multi-Agent Collaboration with Conventional Methods for Diverse Medical Tasks}\endgroup}
+{Co-authors}
+{Conference on Neural Information Processing Systems (NeurIPS) Datasets and Benchmarks Track}
+{2025}
+\pubentry{[Cell Patterns 2024]}
+{\begingroup\hypersetup{hidelinks}\href{https://www.cell.com/patterns/fulltext/S2666-3899(24)00050-3}{A Comprehensive Benchmark For COVID-19 Predictive Modeling Using Electronic Health Records in Intensive Care}\endgroup}
+{Co-authors}
+{Cell Patterns}
+{2024}
+\pubentry{[STAR Protocols 2024]}
+{\begingroup\hypersetup{hidelinks}\href{https://star-protocols.cell.com/protocols/3756}{Protocol to process follow-up electronic medical records of peritoneal dialysis patients to train AI models}\endgroup}
+{Co-authors}
+{STAR Protocols}
+{2024}
+\pubentry{[Preprint 2026]}
+{\begingroup\hypersetup{hidelinks}\href{https://arxiv.org/abs/2510.10185}{Auditing medical multi-agent AI reveals risks of false consensus}\endgroup}
+{Co-authors}
+{Preprint}
+{2026}
+\pubcategorytitle{Healthcare Modeling}
+\pubentry{[KDD 2025]}
+{\begingroup\hypersetup{hidelinks}\href{https://dl.acm.org/doi/10.1145/3690624.3709166}{Learnable Prompt as Pseudo-Imputation: Rethinking the Necessity of Traditional EHR Data Imputation in Downstream Clinical Prediction}\endgroup}
+{Co-authors}
+{ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD)}
+{2025}
+\pubentry{[CIKM 2024]}
+{\begingroup\hypersetup{hidelinks}\href{https://dl.acm.org/doi/10.1145/3627673.3679521}{PRISM: Mitigating EHR Data Sparsity via Learning from Missing Feature Calibrated Prototype Patient Representations}\endgroup}
+{Co-authors}
+{ACM International Conference on Information and Knowledge Management (CIKM)}
+{2024}
+
+\sectiontitle{代表项目}
+\cvitem{\href{https://xiaobeihealth.pku.edu.cn/xiaoya/}{小雅医生（AICare）：面向电子健康记录分析的 AI 临床决策支持平台}}{, \cvdetail{部署于北京大学 Xplore “临床医学 + X” 平台}}{2025}
+
+\sectiontitle{荣誉与奖励}
+\cvitem{北京航空航天大学优秀毕业生}{, \cvdetail{北京航空航天大学}}{2024}
+\cvitem{国家励志奖学金}{, \cvdetail{北京航空航天大学}}{2022, 2023}
+
+\sectiontitle{学术服务}
+\cvitem{审稿人}{, \cvdetail{AAAI 2026, 2027}}{2025, 2026}
+\cvitem{审稿人}{, \cvdetail{npj Digital Medicine}}{2026}
+\cvitem{审稿人}{, \cvdetail{npj Health Systems}}{2026}
+\cvitem{审稿人}{, \cvdetail{Scientific Reports}}{2026}
+
+\end{document}
+
